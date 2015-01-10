@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 12:18:49 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 16:02:44 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 17:02:09 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Squares::Squares(void) : _x(0), _y(0), _next(0), _e(0)
 	return ;
 }
 
-Squares::Squares(Entity * e, int x, int y) : _x(x), _y(x), _next(0), _e(e)
+Squares::Squares(Entity * e, int x, int y) : _x(x), _y(y), _next(0), _e(e)
 {
 	return ;
 }
@@ -53,6 +53,22 @@ Squares					&Squares::operator=(Squares const & rhs)
 ********************  METHODS  ********************
 */
 
+void					Squares::die()
+{
+	delete this->getEntity();
+	this->setEntity(NULL);
+}
+
+void					Squares::move()
+{
+	this->setX(this->getX() - this->getEntity()->getVelocity());
+}
+
+void					Squares::move(int x, int y)
+{
+	this->setX(this->getX() + x);
+	this->setY(this->getY() + y);
+}
 
 /**
 *******************  GETTERS  *******************
@@ -111,5 +127,11 @@ void					Squares::setEntity(Entity * e)
 std::ostream			&operator<<(std::ostream & o, Squares const & rhs)
 {
 	o << rhs.getX() << "/" << rhs.getY() << std::endl;
+	return o;
+}
+
+std::ostream			&operator<<(std::ostream & o, Squares const * rhs)
+{
+	o << rhs->getX() << "/" << rhs->getY() << std::endl;
 	return o;
 }

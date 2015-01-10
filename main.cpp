@@ -6,18 +6,17 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 15:30:54 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 16:12:27 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 17:02:48 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "Screen.class.hpp"
-#include "Squares.class.hpp"
 
 #include "Monster.class.hpp"
 #include "Player.class.hpp"
 #include "Shoot.class.hpp"
 #include "Wall.class.hpp"
-#include "Ft_retro.hpp"
+#include "ft_retro.hpp"
+#include "Screen.class.hpp"
+#include "Squares.class.hpp"
 #include <ncurses.h>
 #include <unistd.h>
 
@@ -41,6 +40,7 @@ int main()
 
 	Squares * c = new Squares(player, 5, 15);
 	Squares * d = new Squares(monster, -5, 5);
+//	drawScreen();
 	s.initGame();
 	for (int i = 0; i < 10; ++i)
 		s.popSquares(new Squares(new Wall(), 0, i));
@@ -57,6 +57,16 @@ int main()
 	s.clearScreen();
 	s.printAll();
 	s.generateNewWalls();
+
+	std::cout << c << std::endl;
+	c->move();
+
+	std::cout << c << std::endl;
+	c->move(5, 5);
+
+	std::cout << c << std::endl;
+	s.killSquares(c);
+
 	s.printAll();
 	s.generateNewMonster();
 	s.generateNewMonster();
@@ -68,7 +78,7 @@ int main()
 	s.generateNewMonster();
 	s.printAll();
 
-	drawScreen();
+	
 
 	return 0;
 }

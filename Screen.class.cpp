@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 16:01:39 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 16:59:20 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void					Screen::printAll(void)
 
 	while(tmp)
 	{
+		//mvprintw(tmp->getY(), tmp->getX(), "%c", tmp->getEntity()->getLetter());
 		std::cout << tmp->getEntity()->getLetter();
 		tmp = tmp->getNext();
 	}
@@ -98,6 +99,7 @@ Squares *				Screen::killSquares(Squares * dead)
 	if (prev == dead)
 	{
 		this->setSquares(dead->getNext());
+		dead->die();
 		delete dead;
 	}
 	else
@@ -107,6 +109,7 @@ Squares *				Screen::killSquares(Squares * dead)
 			if (prev->getNext() == dead)
 			{
 				prev->setNext(dead->getNext());
+				dead->die();
 				delete dead;
 				return (prev);
 			}
@@ -171,7 +174,8 @@ void					Screen::checkCollision()
 
 	while(tmp)
 	{
-		if (tmp->getEntity()->getLetter() == Entity::PLAYER)
+		if (tmp->getEntity()->getLetter() == Entity::PLAYER
+			|| tmp->getEntity()->getLetter() == Entity::SHOOT)
 		{
 			if (collide = this->checkCollision(tmp))
 			{
@@ -194,6 +198,17 @@ Squares *				Screen::checkCollision(Squares * s)
 		tmp = tmp->getNext();
 	}
 	return (NULL);
+}
+
+void					Screen::newTurn()
+{
+	Squares *			tmp = this->getSquares();
+
+	while(tmp)
+	{
+		tmp->move();
+		tmp = tmp->getNext();
+	}
 }
 
 /**

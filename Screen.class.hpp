@@ -1,7 +1,7 @@
 // ************************************************************************** //
 //                                                                            //
 //                                                        :::      ::::::::   //
-//   Screen.hpp                                         :+:      :+:    :+:   //
+//   Screen.class.hpp                                   :+:      :+:    :+:   //
 //                                                    +:+ +:+         +:+     //
 //   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
@@ -10,8 +10,8 @@
 //                                                                            //
 // ************************************************************************** //
 
-#ifndef SCREEN_H
-# define SCREEN_H
+#ifndef SCREEN_CLASS_H
+# define SCREEN_CLASS_H
 
 # include "Squares.class.hpp"
 # include "Monster.class.hpp"
@@ -23,6 +23,8 @@
 # include <string>
 # include <cstdlib>
 # include <ctime>
+#include <ncurses.h>
+#include <unistd.h>
 
 class Screen {
 public:
@@ -64,7 +66,7 @@ public:
 	Squares *			checkCollision(Squares *);	// check if one Square is in collision
 													// return NULL or the ptr of collision
 
-	void				newTurn();
+	void				newTurn();					// move every Squares
 
 	// fonction init de ncurses
 
@@ -76,6 +78,7 @@ private:
 };
 
 std::ostream			&operator<<(std::ostream & o, Screen const & rhs);
+std::ostream			&operator<<(std::ostream & o, Squares const * rhs);
 
 #endif
 
