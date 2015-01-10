@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Screen.class.cpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 18:03:31 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/10 18:52:14 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ void					Screen::printAll(void)
 
 	while(tmp)
 	{
-		//mvprintw(tmp->getY(), tmp->getX(), "%c", tmp->getEntity()->getLetter());
-		std::cout << tmp->getEntity()->getLetter();
+		this->curses_print(tmp->getX(), tmp->getY(), tmp->getEntity()->getLetter(), tmp->getEntity()->getColor());
 		tmp = tmp->getNext();
 	}
 	std::cout << std::endl;
@@ -193,10 +192,10 @@ void					Screen::checkCollision()
 		if (tmp->getEntity()->getLetter() == Entity::PLAYER
 			|| tmp->getEntity()->getLetter() == Entity::SHOOT)
 		{
-			if ( (collide = this->checkCollision(tmp)) )
+			if (collide = this->checkCollision(tmp))
 			{
-				// collide->die();
-				// tmp->die();
+				this->killSquares(collide);
+				this->killSquares(tmp);
 			}
 		}
 		tmp = tmp->getNext();
@@ -229,7 +228,6 @@ void					Screen::newTurn()
 
 void 					Screen::initTerm( int u, int v )
 {
-
 	initscr(); /* Init the screen */
 	noecho(); /* No echo in the screen */
 	curs_set(0); /* Hide the cursor */
@@ -256,6 +254,8 @@ void 					Screen::curses_print( int x, int y, char c, int color)
 int 					Screen::curses_input( void )
 {
 	int ch;
+
+	timeout(100);
 	ch = getch();
 
 	return ch;

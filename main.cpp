@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 15:30:54 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 18:05:47 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/10 18:50:46 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "Screen.class.hpp"
 #include "Squares.class.hpp"
 
+#include <unistd.h>
 
 int main()
 {
@@ -34,34 +35,13 @@ int main()
 	s.pushSquares(d);
 	for (int i = 0; i < 10; ++i)
 		s.pushSquares(new Squares(new Wall(), 1, i));
-	s.printAll();
 
-	s.killSquares(s.getSquares());
-	s.killSquares(s.getLastSquares());
-	s.printAll();
-	s.clearScreen();
-	s.printAll();
-	s.generateNewWalls();
+	int ret = 0;
 
-	std::cout << c << std::endl;
-	c->move();
-
-	std::cout << c << std::endl;
-	c->move(5, 5);
-
-	std::cout << c << std::endl;
-	s.killSquares(c);
-
-	s.printAll();
-	s.generateNewMonster();
-	s.generateNewMonster();
-	s.generateNewMonster();
-	s.generateNewMonster();
-	s.generateNewMonster();
-	s.generateNewMonster();
-	s.generateNewMonster();
-	s.generateNewMonster();
-	s.printAll();
+	while(ret != Screen::ESC){
+		ret = s.curses_input();
+		s.printAll();
+	}
 
 	return 0;
 }
