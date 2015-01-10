@@ -13,7 +13,12 @@
 #ifndef SCREEN_H
 # define SCREEN_H
 
-# include "Squares.hpp"
+# include "Squares.class.hpp"
+# include "Monster.class.hpp"
+# include "Player.class.hpp"
+# include "Shoot.class.hpp"
+# include "Wall.class.hpp"
+
 # include <iostream>
 # include <string>
 # include <cstdlib>

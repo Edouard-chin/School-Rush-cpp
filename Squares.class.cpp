@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Squares.cpp                                        :+:      :+:    :+:   */
+/*   Squares.class.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 12:18:49 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 15:33:05 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 16:02:44 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Squares.hpp"
+#include "Squares.class.hpp"
 
 /**
 *********************  CONSTRUCTORS / DESTRUCTORS  ********************
 */
 
-Squares::Squares(void) : _c(' '), _x(0), _y(0)
+Squares::Squares(void) : _x(0), _y(0), _next(0), _e(0)
 {
 	return ;
 }
 
-Squares::Squares(char c) :  _c(c), _x(0), _y(0)
+Squares::Squares(Entity * e, int x, int y) : _x(x), _y(x), _next(0), _e(e)
 {
 	return ;
 }
 
-Squares::Squares(char c, int x, int y) :  _c(c), _x(x), _y(y)
-{
-	return ;
-}
-
-Squares::Squares(Squares const & src) : _c(src.getC()), _x(src.getX()), _y(src.getY())
+Squares::Squares(Squares const & src) : _x(src.getX()), _y(src.getY()), _next(src.getNext()), _e(src.getEntity())
 {
 	return ;
 }
@@ -48,6 +43,9 @@ Squares::~Squares(void)
 Squares					&Squares::operator=(Squares const & rhs)
 {
 	this->setX(rhs.getX());
+	this->setY(rhs.getY());
+	this->setNext(rhs.getNext());
+	this->setEntity(rhs.getEntity());
 	return (*this);
 }
 
@@ -59,11 +57,6 @@ Squares					&Squares::operator=(Squares const & rhs)
 /**
 *******************  GETTERS  *******************
 */
-
-char					Squares::getC(void) const
-{
-	return (this->_c);
-}
 
 int						Squares::getX(void) const
 {
@@ -80,15 +73,15 @@ Squares *				Squares::getNext(void) const
 	return (this->_next);
 }
 
+Entity *				Squares::getEntity(void) const
+{
+	return (this->_e);
+}
+
 
 /**
 *******************  SETTERS  *******************
 */
-
-void					Squares::setC(char const c)
-{
-	this->_c = c;
-}
 
 void					Squares::setX(int const x)
 {
@@ -103,6 +96,11 @@ void					Squares::setY(int const y)
 void					Squares::setNext(Squares * next)
 {
 	this->_next = next;
+}
+
+void					Squares::setEntity(Entity * e)
+{
+	this->_e = e;
 }
 
 

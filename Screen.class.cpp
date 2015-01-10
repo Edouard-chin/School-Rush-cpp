@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Screen.cpp                                         :+:      :+:    :+:   */
+/*   Screen.class.cpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 15:35:07 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 16:01:39 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Screen.hpp"
+#include "Screen.class.hpp"
 
 /**
 *********************  CONSTRUCTORS / DESTRUCTORS  ********************
@@ -46,6 +46,8 @@ Screen::~Screen(void)
 Screen					&Screen::operator=(Screen const & rhs)
 {
 	this->setU(rhs.getU());
+	this->setV(rhs.getV());
+	this->setSquares(rhs.getSquares());
 	return (*this);
 }
 
@@ -55,8 +57,7 @@ Screen					&Screen::operator=(Screen const & rhs)
 
 void					Screen::initGame(void)
 {
-	this->setSquares(new Squares('#'));
-	this->getSquares();
+	this->setSquares(new Squares(new Wall(), 0, 0));
 	return ;
 }
 
@@ -66,7 +67,7 @@ void					Screen::printAll(void)
 
 	while(tmp)
 	{
-		std::cout << tmp->getC();
+		std::cout << tmp->getEntity()->getLetter();
 		tmp = tmp->getNext();
 	}
 	std::cout << std::endl;
@@ -135,9 +136,9 @@ void					Screen::generateNewWalls()
 	int nbOfWallsDown = std::rand() % 4;
 
 	for (int i = 0; i < nbOfWallsUp; ++i)
-		this->popSquares(new Squares('3', this->getU() - 1, i));
+		this->popSquares(new Squares(new Wall(), this->getU() - 1, i));
 	for (int i = 0; i < nbOfWallsDown; ++i)
-		this->popSquares(new Squares('6', this->getU() - 1, this->getV() - 1 - i));
+		this->popSquares(new Squares(new Wall(), this->getU() - 1, this->getV() - 1 - i));
 }
 
 int						Screen::generateNewMonster()
@@ -148,7 +149,7 @@ int						Screen::generateNewMonster()
 
 	while(tmp)
 	{
-		if (tmp->getC() == '1')	// entity
+		if (tmp->getEntity()->getLetter() == Entity::MONSTER)
 			nbMonsterIn++;
 		tmp = tmp->getNext();
 	}
@@ -156,7 +157,7 @@ int						Screen::generateNewMonster()
 	if (nbMonsterIn < 5)
 	{
 		randomY = ((std::rand() % (this->getV() - 10)) + 5);
-		this->popSquares(new Squares('1', this->getU() - 1, randomY)); // entity
+		this->popSquares(new Squares(new Monster(), this->getU() - 1, randomY));
 		nbMonsterIn++;
 	}
 
@@ -170,7 +171,7 @@ void					Screen::checkCollision()
 
 	while(tmp)
 	{
-		if (tmp->getC() == '#')	// entity // if player
+		if (tmp->getEntity()->getLetter() == Entity::PLAYER)
 		{
 			if (collide = this->checkCollision(tmp))
 			{

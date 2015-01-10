@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 15:30:54 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 16:05:16 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/10 16:12:27 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Screen.hpp"
-#include "Squares.hpp"
+#include "Screen.class.hpp"
+#include "Squares.class.hpp"
+
 #include "Monster.class.hpp"
 #include "Player.class.hpp"
 #include "Shoot.class.hpp"
@@ -33,20 +34,20 @@ int main()
 
 	Screen s;
 
-	Monster monster;
-	Player player;
-	Shoot shoot;
-	Wall wall;
+	Monster * monster = new Monster();
+	Player * player = new Player();
+	Shoot * shoot = new Shoot();
+	Wall * wall = new Wall();
 
-	Squares * c = new Squares('c');
-	Squares * d = new Squares('x', -5, 5);
+	Squares * c = new Squares(player, 5, 15);
+	Squares * d = new Squares(monster, -5, 5);
 	s.initGame();
 	for (int i = 0; i < 10; ++i)
-		s.popSquares(new Squares('r'));
+		s.popSquares(new Squares(new Wall(), 0, i));
 	s.pushSquares(c);
 	s.pushSquares(d);
 	for (int i = 0; i < 10; ++i)
-		s.pushSquares(new Squares('t'));
+		s.pushSquares(new Squares(new Wall(), 1, i));
 	s.printAll();
 
 	s.killSquares(s.getSquares());
