@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:13:35 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 16:01:24 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 16:10:11 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 class Squares {
 public:
 	Squares(void);
-	Squares(Entity *, int, int);			// entite stocke directement dedans
+	Squares(Entity *, int, int);
 	Squares(Squares const & src);
 	virtual ~Squares(void);
 
@@ -38,10 +38,10 @@ public:
 
 
 private:
-	int					_x;		// x position
-	int					_y;		// y position
-	Squares *			_next;	// liste chainee
-	Entity *			_e;		// contient l'entite a afficher
+	int					_x;
+	int					_y;
+	Squares *			_next;
+	Entity *			_e;
 };
 
 std::ostream			&operator<<(std::ostream & o, Squares const & rhs);
