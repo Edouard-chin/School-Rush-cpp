@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Shoot.class.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 13:05:57 by echin             #+#    #+#             */
-/*   Updated: 2015/01/10 16:37:23 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 17:31:28 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ class Shoot : public Entity
 
 public:
 	Shoot(void);
-	~Shoot(void);
+	virtual ~Shoot(void);
 	Shoot (Shoot const &shoot);
-	Shoot &operator=(Shoot const &shoot);
+	Shoot const &operator=(Shoot const &shoot);
 	int		getDamage(void) const;
 	void	setDamage(int damage);
 

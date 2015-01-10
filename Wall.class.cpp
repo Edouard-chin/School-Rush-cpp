@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Wall.class.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 13:06:12 by echin             #+#    #+#             */
-/*   Updated: 2015/01/10 16:37:25 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 17:31:44 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,11 @@ Wall::Wall (Wall const &wall) : Entity(wall.getLetter(), wall.getVelocity(), wal
 
 Wall const &Wall::operator=(Wall const &wall)
 {
+	this->_letter = wall.getLetter();
+	this->_velocity = wall.getVelocity();
+	this->_color = wall.getColor();
+	this->_mhp = wall.getMhp();
+	this->_chp = wall.getChp();
 
+	return wall;
 }

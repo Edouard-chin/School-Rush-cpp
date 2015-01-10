@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Entity.class.cpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:37:30 by echin             #+#    #+#             */
-/*   Updated: 2015/01/10 16:37:06 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 17:29:35 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,20 @@ Entity::~Entity(void)
 
 }
 
-Entity::Entity(const Entity &entity)
+Entity::Entity(const Entity &entity) : _letter(entity.getLetter()), _velocity(entity.getVelocity()), _color(entity.getColor()), _mhp(entity.getMhp()), _chp(entity.getChp())
 {
 
 }
 
-Entity &Entity::operator=(Entity const &entity)
+Entity const &Entity::operator=(Entity const &entity)
 {
+	this->_letter = entity.getLetter();
+	this->_velocity = entity.getVelocity();
+	this->_color = entity.getColor();
+	this->_mhp = entity.getMhp();
+	this->_chp = entity.getChp();
 
+	return entity;
 }
 
 char		Entity::getLetter(void) const

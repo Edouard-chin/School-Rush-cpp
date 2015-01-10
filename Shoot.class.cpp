@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Shoot.class.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 13:06:05 by echin             #+#    #+#             */
-/*   Updated: 2015/01/10 16:37:22 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 17:31:20 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,15 @@ Shoot::Shoot (Shoot const &shoot) : Entity(shoot.getLetter(), shoot.getVelocity(
 
 }
 
-Shoot &Shoot::operator=(Shoot const &shoot)
+Shoot const &Shoot::operator=(Shoot const &shoot)
 {
+	this->_letter = shoot.getLetter();
+	this->_velocity = shoot.getVelocity();
+	this->_color = shoot.getColor();
+	this->_mhp = shoot.getMhp();
+	this->_chp = shoot.getChp();
 
+	return shoot;
 }
 
 int		Shoot::getDamage(void) const
