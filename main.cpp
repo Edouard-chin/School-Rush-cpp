@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 15:30:54 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 18:50:46 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 20:44:55 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,11 @@
 
 int main()
 {
-
-	Screen s;
-	Monster * monster = new Monster();
-	Player * player = new Player();
-	Squares * c = new Squares(player, 5, 15);
-	Squares * d = new Squares(monster, -5, 5);
+	Screen	s;
 
 	s.initGame();
-	for (int i = 0; i < 10; ++i)
-		s.popSquares(new Squares(new Wall(), 0, i));
-	s.pushSquares(c);
-	s.pushSquares(d);
-	for (int i = 0; i < 10; ++i)
-		s.pushSquares(new Squares(new Wall(), 1, i));
+	while(s.newTurn() != Screen::ESC) {
 
-	int ret = 0;
-
-	while(ret != Screen::ESC){
-		ret = s.curses_input();
-		s.printAll();
 	}
 
 	return 0;
