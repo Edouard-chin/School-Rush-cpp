@@ -6,11 +6,20 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 17:31:05 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/10 18:03:31 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Screen.class.hpp"
+
+const	int			Screen::ESC = 27;
+const	int			Screen::UP = 119;
+const	int			Screen::DOWN = 115;
+const 	int 		Screen::LEFT = 97;
+const	int			Screen::RIGHT = 100;
+const	int			Screen::ENTER = 10;
+const	int			Screen::SPACE = 32;
+
 
 /**
 *********************  CONSTRUCTORS / DESTRUCTORS  ********************
@@ -19,12 +28,16 @@
 Screen::Screen(void) : _u(80), _v(25), _squares(NULL)
 {	
 	std::srand(std::time(0));
+	this->initTerm(_u, _v);
+
 	return ;
 }
 
 Screen::Screen(int u, int v) : _u(u), _v(v), _squares(NULL)
 {
 	std::srand(std::time(0));
+	this->initTerm(_u, _v);
+
 	return ;
 }
 
@@ -36,7 +49,10 @@ Screen::Screen(Screen const & src) : _u(src.getU()), _v(src.getV()), _squares(sr
 
 Screen::~Screen(void)
 {
-	return ;
+	clear();
+	endwin();	
+
+	return;
 }
 
 /**
@@ -209,6 +225,40 @@ void					Screen::newTurn()
 		tmp->move();
 		tmp = tmp->getNext();
 	}
+}
+
+void 					Screen::initTerm( int u, int v )
+{
+
+	initscr(); /* Init the screen */
+	noecho(); /* No echo in the screen */
+	curs_set(0); /* Hide the cursor */
+	resizeterm(v, u); /* Resize the ncurse grid */
+	start_color(); 		/* Init color */
+    init_pair(1, 1, 0); /* RED */
+    init_pair(2, 2, 0); /* GREEN */
+    init_pair(3, 3, 0); /* YELLOW */
+    init_pair(4, 4, 0); /* BLUE */
+    init_pair(5, 5, 0); /* MAGENTA */
+    init_pair(6, 6, 0); /* CYAN */
+}
+
+void 					Screen::curses_print( int x, int y, char c, int color)
+{
+	attron(COLOR_PAIR(color));
+	mvprintw( y, x, "%c", c );
+	attroff(COLOR_PAIR(color));
+	refresh();
+
+	return;
+}
+
+int 					Screen::curses_input( void )
+{
+	int ch;
+	ch = getch();
+
+	return ch;
 }
 
 /**
