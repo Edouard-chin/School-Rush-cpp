@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Squares.class.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:13:35 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 16:55:05 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 18:05:17 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "Entity.class.hpp"
 # include <iostream>
-# include <string>
 
 class Squares {
 public:

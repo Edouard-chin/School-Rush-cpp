@@ -20,11 +20,9 @@
 # include "Wall.class.hpp"
 
 # include <iostream>
-# include <string>
 # include <cstdlib>
 # include <ctime>
-#include <ncurses.h>
-#include <unistd.h>
+# include <ncurses.h>
 
 class Screen {
 public:
@@ -65,8 +63,20 @@ public:
 	void				checkCollision();			// check all collisions
 	Squares *			checkCollision(Squares *);	// check if one Square is in collision
 													// return NULL or the ptr of collision
-
 	void				newTurn();					// move every Squares
+
+	void 				initTerm(int u, int v);
+	void 				curses_print( int x, int y, char c, int color);
+	int 				curses_input( void );
+
+
+	static const int 	ESC;
+	static const int 	UP;
+	static const int 	DOWN;
+	static const int 	LEFT;
+	static const int 	RIGHT;
+	static const int 	ENTER;
+	static const int 	SPACE;
 
 	// fonction init de ncurses
 
