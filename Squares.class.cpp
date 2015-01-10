@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Squares.class.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 12:18:49 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 16:02:44 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 16:50:16 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Squares::Squares(void) : _x(0), _y(0), _next(0), _e(0)
 	return ;
 }
 
-Squares::Squares(Entity * e, int x, int y) : _x(x), _y(x), _next(0), _e(e)
+Squares::Squares(Entity * e, int x, int y) : _x(x), _y(y), _next(0), _e(e)
 {
 	return ;
 }

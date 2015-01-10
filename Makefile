@@ -11,7 +11,7 @@
 #******************************************************************************#
 
 NAME = ft_retro
-CFLAGS = 
+CFLAGS = -Wall -Werror -Wextra
 SRC = Entity.class.cpp Monster.class.cpp Player.class.cpp Shoot.class.cpp Wall.class.cpp Screen.class.cpp Squares.class.cpp main.cpp 
 OBJ = $(SRC:.cpp=.o)
 LFLAGS = -lncurses

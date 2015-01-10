@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 13:00:09 by echin             #+#    #+#             */
-/*   Updated: 2015/01/10 14:53:11 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/10 16:47:23 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ public:
 	Monster(void);
 	~Monster(void);
 	Monster (Monster const &monster);
-	Monster &operator=(Monster const &monster);
+	Monster const &operator=(Monster const &monster);
 
 };
 

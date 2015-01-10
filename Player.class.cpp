@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 12:59:46 by echin             #+#    #+#             */
-/*   Updated: 2015/01/10 15:23:13 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/10 16:46:02 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,11 @@ Player::Player (Player const &player) : Entity(player.getLetter(), player.getVel
 
 Player const &Player::operator=(Player const &player)
 {
+	this->_letter = player.getLetter();
+	this->_velocity = player.getVelocity();
+	this->_color = player.getColor();
+	this->_mhp = player.getMhp();
+	this->_chp = player.getChp();
 
+	return player;
 }
