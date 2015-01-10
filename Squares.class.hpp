@@ -6,12 +6,12 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:13:35 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 16:10:11 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 16:55:05 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SQUARES_H
-# define SQUARES_H
+#ifndef SQUARES_CLASS_H
+# define SQUARES_CLASS_H
 
 # include "Entity.class.hpp"
 # include <iostream>
@@ -36,6 +36,9 @@ public:
 	void				setNext(Squares *);
 	void				setEntity(Entity *);
 
+	void				die();
+	void				move();
+	void				move(int, int);
 
 private:
 	int					_x;

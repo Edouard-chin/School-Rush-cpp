@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 12:18:49 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 16:50:16 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/10 17:31:36 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,22 @@ Squares					&Squares::operator=(Squares const & rhs)
 ********************  METHODS  ********************
 */
 
+void					Squares::die()
+{
+	delete this->getEntity();
+	this->setEntity(NULL);
+}
+
+void					Squares::move()
+{
+	this->setX(this->getX() - this->getEntity()->getVelocity());
+}
+
+void					Squares::move(int x, int y)
+{
+	this->setX(this->getX() + x);
+	this->setY(this->getY() + y);
+}
 
 /**
 *******************  GETTERS  *******************
@@ -111,5 +127,11 @@ void					Squares::setEntity(Entity * e)
 std::ostream			&operator<<(std::ostream & o, Squares const & rhs)
 {
 	o << rhs.getX() << "/" << rhs.getY() << std::endl;
+	return o;
+}
+
+std::ostream			&operator<<(std::ostream & o, Squares const * rhs)
+{
+	o << rhs->getX() << "/" << rhs->getY() << std::endl;
 	return o;
 }

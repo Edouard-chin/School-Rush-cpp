@@ -6,18 +6,17 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 15:30:54 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 17:14:51 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/10 17:32:52 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "Screen.class.hpp"
-#include "Squares.class.hpp"
 
 #include "Monster.class.hpp"
 #include "Player.class.hpp"
 #include "Shoot.class.hpp"
 #include "Wall.class.hpp"
 #include "Ft_retro.hpp"
+#include "Screen.class.hpp"
+#include "Squares.class.hpp"
 #include <ncurses.h>
 #include <unistd.h>
 
@@ -55,6 +54,16 @@ int main()
 	s.clearScreen();
 	s.printAll();
 	s.generateNewWalls();
+
+	std::cout << c << std::endl;
+	c->move();
+
+	std::cout << c << std::endl;
+	c->move(5, 5);
+
+	std::cout << c << std::endl;
+	s.killSquares(c);
+
 	s.printAll();
 	s.generateNewMonster();
 	s.generateNewMonster();
