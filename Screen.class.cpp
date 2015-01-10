@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 16:59:20 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 17:10:36 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,15 +172,16 @@ void					Screen::checkCollision()
 	Squares *			tmp = this->getSquares();
 	Squares *			collide = NULL;
 
-	while(tmp)
+	while(tmp)								// ici pour check si le jeu est termine
 	{
 		if (tmp->getEntity()->getLetter() == Entity::PLAYER
 			|| tmp->getEntity()->getLetter() == Entity::SHOOT)
 		{
 			if (collide = this->checkCollision(tmp))
 			{
-				// collide->die();
-				// tmp->die();
+				std::cout << " MATCH " << std::endl;
+				this->killSquares(collide);
+				this->killSquares(tmp);
 			}
 		}
 		tmp = tmp->getNext();

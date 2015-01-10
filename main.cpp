@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 15:30:54 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 17:02:48 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 17:07:22 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,25 @@ int main()
 
 	s.killSquares(s.getSquares());
 	s.killSquares(s.getLastSquares());
-	s.killSquares(c);
+//	s.killSquares(c);
 	s.printAll();
 	s.clearScreen();
 	s.printAll();
 	s.generateNewWalls();
 
-	std::cout << c << std::endl;
+	std::cout << c;
+	std::cout << d ;
 	c->move();
+	d->move(1, 14);
 
-	std::cout << c << std::endl;
+	std::cout << c ;
+	std::cout << d ;
 	c->move(5, 5);
 
-	std::cout << c << std::endl;
+	s.checkCollision();
+
+	std::cout << c ;
+	std::cout << d ;
 	s.killSquares(c);
 
 	s.printAll();
