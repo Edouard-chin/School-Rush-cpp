@@ -4,6 +4,14 @@
 #define Y_MAX 25
 #define X_MAX 80
 
+#define ESC 27
+#define UP 119
+#define DOWN 115
+#define LEFT 97
+#define RIGHT 100
+#define ENTER 10
+#define SPACE 32
+
 void		curses_init( void ) {
 
 	initscr(); /* Init the screen */
@@ -23,9 +31,11 @@ void		curses_init( void ) {
 	return;
 }
 
-void 		curses_print( int y, int x, char c) {
+void 		curses_print( int y, int x, char c, int color) {
 
+	attron(COLOR_PAIR(color));
 	mvprintw( y, x, "%c", c );
+	attroff(COLOR_PAIR(color));
 	refresh();
 
 	return;
@@ -43,7 +53,7 @@ void 		curses_kill( void ) {
 
 
 	curses_init();
-	curses_print(5, 5, 'X');
+	curses_print(5, 5, 'X', 5);
 	getch();
 	curses_kill();
 	return 0;
