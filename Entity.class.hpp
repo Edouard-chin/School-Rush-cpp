@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:37:54 by echin             #+#    #+#             */
-/*   Updated: 2015/01/10 16:47:08 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/10 16:54:09 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ class Entity
 
 public:
 	Entity(char letter, int velocity, int color, int mhp, int chp);
-	~Entity(void);
+	virtual ~Entity(void);
 	Entity(Entity const &entity);
 	Entity const &operator=(Entity const &entity);
 	char		getLetter(void) const;

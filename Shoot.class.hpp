@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 13:05:57 by echin             #+#    #+#             */
-/*   Updated: 2015/01/10 16:47:49 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/10 16:54:30 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ class Shoot : public Entity
 
 public:
 	Shoot(void);
-	~Shoot(void);
+	virtual ~Shoot(void);
 	Shoot (Shoot const &shoot);
 	Shoot const &operator=(Shoot const &shoot);
 	int		getDamage(void) const;
