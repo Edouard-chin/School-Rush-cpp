@@ -6,7 +6,11 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 13:06:05 by echin             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2015/01/10 16:37:22 by fbaudet-         ###   ########.fr       */
+=======
+/*   Updated: 2015/01/10 16:47:45 by echin            ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +31,15 @@ Shoot::Shoot (Shoot const &shoot) : Entity(shoot.getLetter(), shoot.getVelocity(
 
 }
 
-Shoot &Shoot::operator=(Shoot const &shoot)
+Shoot const &Shoot::operator=(Shoot const &shoot)
 {
+	this->_letter = shoot.getLetter();
+	this->_velocity = shoot.getVelocity();
+	this->_color = shoot.getColor();
+	this->_mhp = shoot.getMhp();
+	this->_chp = shoot.getChp();
 
+	return shoot;
 }
 
 int		Shoot::getDamage(void) const

@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 15:30:54 by fbaudet-          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2015/01/10 17:07:22 by fbaudet-         ###   ########.fr       */
+=======
+/*   Updated: 2015/01/10 16:50:57 by echin            ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +39,8 @@ int main()
 
 	Monster * monster = new Monster();
 	Player * player = new Player();
-	Shoot * shoot = new Shoot();
-	Wall * wall = new Wall();
+	// Shoot * shoot = new Shoot();
+	// Wall * wall = new Wall();
 
 	Squares * c = new Squares(player, 5, 15);
 	Squares * d = new Squares(monster, -5, 5);
@@ -91,7 +95,7 @@ int main()
 
 void drawScreen()
 {
-	WINDOW *win;
+	// WINDOW *win;
 
 	int 	row,col,x = 0,y = 0;
 	int 	ch;

@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 13:05:45 by echin             #+#    #+#             */
-/*   Updated: 2015/01/10 16:37:16 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 17:14:46 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,13 @@ Monster::Monster (Monster const &monster) : Entity(monster.getLetter(), monster.
 
 }
 
-Monster &Monster::operator=(Monster const &monster)
+Monster const &Monster::operator=(Monster const &monster)
 {
+	this->_letter = monster.getLetter();
+	this->_velocity = monster.getVelocity();
+	this->_color = monster.getColor();
+	this->_mhp = monster.getMhp();
+	this->_chp = monster.getChp();
 
+	return monster;
 }

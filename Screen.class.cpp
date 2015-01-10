@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 17:10:36 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 17:15:07 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ void					Screen::checkCollision()
 		if (tmp->getEntity()->getLetter() == Entity::PLAYER
 			|| tmp->getEntity()->getLetter() == Entity::SHOOT)
 		{
-			if (collide = this->checkCollision(tmp))
+			if ( (collide = this->checkCollision(tmp)) )
 			{
 				std::cout << " MATCH " << std::endl;
 				this->killSquares(collide);

@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 12:59:53 by echin             #+#    #+#             */
-/*   Updated: 2015/01/10 16:37:19 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 17:15:01 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ class Player : public Entity
 
 public:
 	Player(void);
-	~Player(void);
+	virtual ~Player(void);
 	Player (Player const &player);
 	Player const &operator=(Player const &player);
 
