@@ -41,20 +41,34 @@ void 		curses_print( int y, int x, char c, int color) {
 	return;
 }
 
+int 		curses_input( void ) {
+
+	int ch;
+
+	ch = getch();
+
+	return ch;
+}
+
 void 		curses_kill( void ) {
 
 	clear();
-	endwin();
+	endwin();	
 
 	return;
 }
 
 /*int 	main() {
-
-
+	int i = 5;
+	int key;
 	curses_init();
-	curses_print(5, 5, 'X', 5);
-	getch();
+	while (42) {
+		curses_print(i, i, 'X', 5);
+		key = curses_input();
+		if ( key == UP )
+			break;
+		i++;
+	}
 	curses_kill();
 	return 0;
 }*/
