@@ -6,17 +6,18 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 18:52:14 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 20:48:05 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Screen.class.hpp"
+#include <stdlib.h>
 
 const	int			Screen::ESC = 27;
-const	int			Screen::UP = 119;
-const	int			Screen::DOWN = 115;
-const 	int 		Screen::LEFT = 97;
-const	int			Screen::RIGHT = 100;
+const	int			Screen::UP = 259;
+const	int			Screen::DOWN = 258;
+const 	int 		Screen::LEFT = 260;
+const	int			Screen::RIGHT = 261;
 const	int			Screen::ENTER = 10;
 const	int			Screen::SPACE = 32;
 
@@ -73,7 +74,15 @@ Screen					&Screen::operator=(Screen const & rhs)
 
 void					Screen::initGame(void)
 {
-	this->setSquares(new Squares(new Wall(), 0, 0));
+	this->setPlayer(new Squares(new Player(), 10, 11));
+	this->setSquares(this->getPlayer());
+	for (int i = 0; i < this->getU(); ++i)
+	{
+		this->popSquares(new Squares(new Wall(), i, 0));
+		this->popSquares(new Squares(new Wall(), i, 1));
+		this->popSquares(new Squares(new Wall(), i, this->getV() - 1));
+		this->popSquares(new Squares(new Wall(), i, this->getV() - 2));
+	}
 	return ;
 }
 
@@ -81,6 +90,7 @@ void					Screen::printAll(void)
 {
 	Squares *			tmp = this->getSquares();
 
+	clear();
 	while(tmp)
 	{
 		this->curses_print(tmp->getX(), tmp->getY(), tmp->getEntity()->getLetter(), tmp->getEntity()->getColor());
@@ -150,8 +160,8 @@ void					Screen::clearScreen()
 
 void					Screen::generateNewWalls()
 {
-	int nbOfWallsUp = std::rand() % 4;
-	int nbOfWallsDown = std::rand() % 4;
+	int nbOfWallsUp = (std::rand() % 4) + 2;
+	int nbOfWallsDown = (std::rand() % 4) + 2;
 
 	for (int i = 0; i < nbOfWallsUp; ++i)
 		this->popSquares(new Squares(new Wall(), this->getU() - 1, i));
@@ -159,27 +169,17 @@ void					Screen::generateNewWalls()
 		this->popSquares(new Squares(new Wall(), this->getU() - 1, this->getV() - 1 - i));
 }
 
-int						Screen::generateNewMonster()
+void						Screen::generateNewMonster()
 {
-	int					nbMonsterIn = 0;
-	Squares *			tmp = this->getSquares();
 	int					randomY;
+	int					randomValid;
 
-	while(tmp)
-	{
-		if (tmp->getEntity()->getLetter() == Entity::MONSTER)
-			nbMonsterIn++;
-		tmp = tmp->getNext();
-	}
-
-	if (nbMonsterIn < 5)
-	{
-		randomY = ((std::rand() % (this->getV() - 10)) + 5);
+	randomY = ((std::rand() % (this->getV() - 10)) + 5);
+	randomValid = ((std::rand() % 15) + randomY);
+	if (randomY == randomValid)
 		this->popSquares(new Squares(new Monster(), this->getU() - 1, randomY));
-		nbMonsterIn++;
-	}
-
-	return (nbMonsterIn);
+	// TODO check si case deja prise en Y
+	return ;
 }
 
 void					Screen::checkCollision()
@@ -192,7 +192,7 @@ void					Screen::checkCollision()
 		if (tmp->getEntity()->getLetter() == Entity::PLAYER
 			|| tmp->getEntity()->getLetter() == Entity::SHOOT)
 		{
-			if (collide = this->checkCollision(tmp))
+			if ((collide = this->checkCollision(tmp)))
 			{
 				this->killSquares(collide);
 				this->killSquares(tmp);
@@ -208,27 +208,55 @@ Squares *				Screen::checkCollision(Squares * s)
 
 	while(tmp)
 	{
-		if (s->getX() == tmp->getX() && s->getY() == tmp->getY())
+		if (s != tmp && s->getX() == tmp->getX() && s->getY() == tmp->getY())
 			return (tmp);
 		tmp = tmp->getNext();
 	}
 	return (NULL);
 }
 
-void					Screen::newTurn()
+int						Screen::newTurn()
 {
 	Squares *			tmp = this->getSquares();
+	Squares *			player = this->getPlayer();
+	int					key;
+
+	key = this->curses_input();
+	std::cout << key << std::endl;
+	if (key == Screen::ESC)
+		return (key);
+	else if (key == Screen::DOWN)
+		player->move(0, 1);
+	else if (key == Screen::UP)
+		player->move(0, -1);
+	else if (key == Screen::RIGHT)
+		player->move(1, 0);
+	else if (key == Screen::LEFT)
+		player->move(-1, 0);
+	else if (key == Screen::SPACE)
+		this->popSquares(new Squares(new Shoot(), player->getX() + 1, player->getY()));
 
 	while(tmp)
 	{
 		tmp->move();
 		tmp = tmp->getNext();
 	}
+	this->clearScreen();
+	this->generateNewWalls();
+	this->generateNewMonster();
+	this->checkCollision();
+	this->printAll();
+
+	return (key);
 }
 
 void 					Screen::initTerm( int u, int v )
 {
 	initscr(); /* Init the screen */
+	keypad(stdscr, TRUE);
+	if (getenv("ESCDELAY") == NULL) {
+		ESCDELAY = 1;
+	}
 	noecho(); /* No echo in the screen */
 	curs_set(0); /* Hide the cursor */
 	resizeterm(v, u); /* Resize the ncurse grid */
@@ -255,8 +283,8 @@ int 					Screen::curses_input( void )
 {
 	int ch;
 
-	timeout(100);
-	ch = getch();
+	timeout(50);
+	ch = wgetch(stdscr);
 
 	return ch;
 }
@@ -291,6 +319,11 @@ Squares *				Screen::getLastSquares(void) const
 	return (tmp);
 }
 
+Squares *				Screen::getPlayer(void) const
+{
+	return (this->_player);
+}
+
 /**
 *******************  SETTERS  *******************
 */
@@ -305,11 +338,15 @@ void					Screen::setV(int const v)
 	this->_v = v;
 }
 
-void					Screen::setSquares(Squares * s)
+void					Screen::setSquares(Squares * squares)
 {
-	this->_squares = s;
+	this->_squares = squares;
 }
 
+void					Screen::setPlayer(Squares * player)
+{
+	this->_player = player;
+}
 
 /**
 *******************  NON MEMBERS METHODS  *******************

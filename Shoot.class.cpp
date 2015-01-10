@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Shoot.class.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 13:06:05 by echin             #+#    #+#             */
-/*   Updated: 2015/01/10 17:31:20 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/10 20:20:58 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Shoot.class.hpp"
 
-Shoot::Shoot(void) : Entity(Shoot::SHOOT, 1, Shoot::RED, 50, 50)
+Shoot::Shoot(void) : Entity(Shoot::SHOOT, -1, Shoot::RED, 50, 50)
 {
 
 }

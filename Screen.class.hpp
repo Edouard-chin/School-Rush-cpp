@@ -37,10 +37,12 @@ public:
 	int					getV() const;
 	Squares *			getSquares() const;				// return first
 	Squares *			getLastSquares(void) const;		// return the last
+	Squares *			getPlayer() const;
 
 	void				setU(int const u);
 	void				setV(int const v);
-	void				setSquares(Squares * s);
+	void				setSquares(Squares *);
+	void				setPlayer(Squares *);
 
 	void				initGame();
 
@@ -55,20 +57,18 @@ public:
 
 	void				generateNewWalls();			// after clear, create wall in last X
 
-	int					generateNewMonster();		// check how many M exists and create if need
+	void				generateNewMonster();		// check how many M exists and create if need
 
-	/*
-	**	collision, on check d'abord le player
-	*/
 	void				checkCollision();			// check all collisions
 	Squares *			checkCollision(Squares *);	// check if one Square is in collision
 													// return NULL or the ptr of collision
-	void				newTurn();					// move every Squares
+	int					newTurn();					// return keyboard
 
 	void 				initTerm(int u, int v);
 	void 				curses_print( int x, int y, char c, int color);
 	int 				curses_input( void );
 
+	// TODO changer nom deux fct ci dessus camelcase
 
 	static const int 	ESC;
 	static const int 	UP;
@@ -78,12 +78,11 @@ public:
 	static const int 	ENTER;
 	static const int 	SPACE;
 
-	// fonction init de ncurses
-
 private:
-	int					_u;			// taille largeur
-	int					_v;			// taille hauteur
-	Squares	*			_squares;	// tableau de squares en fixe
+	int					_u;
+	int					_v;
+	Squares	*			_squares;
+	Squares *			_player;
 
 };
 
