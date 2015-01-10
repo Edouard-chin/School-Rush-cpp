@@ -1,10 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/01/10 15:30:54 by fbaudet-          #+#    #+#             */
+/*   Updated: 2015/01/10 15:31:48 by fbaudet-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Screen.hpp"
 #include "Squares.hpp"
+
+#include "Monster.class.hpp"
+#include "Player.class.hpp"
+#include "Shoot.class.hpp"
+#include "Wall.class.hpp"
 
 int main()
 {
 
 	Screen s;
+
+	Monster monster;
+	Player player;
+	Shoot shoot;
+	Wall wall;
+
 	Squares * c = new Squares('c');
 	Squares * d = new Squares('x', -5, 5);
 	s.initGame();
