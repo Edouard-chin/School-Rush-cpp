@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Screen.class.cpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 16:01:39 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/10 16:49:20 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ void					Screen::checkCollision()
 	{
 		if (tmp->getEntity()->getLetter() == Entity::PLAYER)
 		{
-			if (collide = this->checkCollision(tmp))
+			if ( (collide = this->checkCollision(tmp)) )
 			{
 				// collide->die();
 				// tmp->die();
