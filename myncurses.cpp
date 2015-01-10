@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ncurses.h>
 
 #define Y_MAX 25
 #define X_MAX 80
@@ -37,3 +38,13 @@ void 		curses_kill( void ) {
 
 	return;
 }
+
+/*int 	main() {
+
+
+	curses_init();
+	curses_print(5, 5, 'X');
+	getch();
+	curses_kill();
+	return 0;
+}*/
