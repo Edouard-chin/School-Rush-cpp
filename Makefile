@@ -11,16 +11,17 @@
 #******************************************************************************#
 
 NAME = ft_retro
-CFLAGS = -Wall -Werror -Wextra
-SRC = ft_retro.cpp Entity.class.cpp
+CFLAGS = 
+SRC = Entity.class.cpp Monster.class.cpp Player.class.cpp Shoot.class.cpp Wall.class.cpp Screen.cpp Squares.cpp main.cpp 
 OBJ = $(SRC:.cpp=.o)
+LFLAGS = -lncurses
 
 .SILENT:
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	g++ $(CFLAGS) -o $@ $^
+	g++ $(CFLAGS) -o $@ $^ $(LFLAGS)
 
 %.o: %.cpp
 	g++ $(CFLAGS) -o $@ -c $^
