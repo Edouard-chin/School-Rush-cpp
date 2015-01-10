@@ -12,7 +12,7 @@
 
 NAME = ft_retro
 CFLAGS = -Wall -Werror -Wextra
-SRC = ft_retro.cpp
+SRC = ft_retro.cpp Entity.class.cpp
 OBJ = $(SRC:.cpp=.o)
 
 .SILENT:
