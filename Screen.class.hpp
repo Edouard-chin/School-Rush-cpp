@@ -72,6 +72,9 @@ public:
 	void 				initTerm( int u, int v );
 	void 				cursesPrint( int x, int y, char c, int color );
 	int 				cursesInput( void );
+	
+	void		 		printMenu( void );
+	void				makeBorder( int xmin, int ymin, int xmax, int ymax );
 
 	static const int 	ESC;
 	static const int 	UP;

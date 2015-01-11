@@ -79,6 +79,7 @@ Screen					&Screen::operator=(Screen const & rhs)
 
 void					Screen::initGame(void)
 {
+	this->printMenu();
 	this->setPlayer(new Squares(new Player(), 10, 11));
 	this->setSquares(this->getPlayer());
 	for (int i = 0; i < this->getU(); ++i)
@@ -326,12 +327,82 @@ void 					Screen::cursesPrint( int x, int y, char c, int color)
 
 int 					Screen::cursesInput( void )
 {
-	int ch;
+	int 	ch;
 
 	timeout(50);
 	ch = wgetch(stdscr);
 
 	return ch;
+}
+
+void		Screen::makeBorder( int xmin, int ymin, int xmax, int ymax ) 
+{
+
+	int i;
+	int j;
+
+	i = ymin;
+
+	while (i < ymax) {
+
+		if (i == ymin || i == ymax-1) {
+
+			j = xmin;
+			while (j < xmax) {
+				mvprintw(i, j ,"%c", '*');
+				j++;
+			}
+		} else {
+			mvprintw( i, xmin,"%c", '*');
+			mvprintw( i, xmax - 1,"%c", '*');
+		}
+		i++;
+	}
+}
+
+void		 Screen::printMenu( void )
+{
+
+	int 	i;
+	int 	ch;
+
+	i = 1;
+
+	std::string	play("Press ENTER to play");
+
+	while ( ch != Screen::ESC ) {	
+		
+		timeout(500);
+		ch = getch();
+
+		clear();
+
+		switch ( ch ) {
+
+			case Screen::ENTER:
+				return;
+
+			default:
+				if (i) {
+					i = 0;
+					attron(COLOR_PAIR(1));
+					makeBorder( 0, 0, this->getU(), this->getV() );
+					attron(COLOR_PAIR(2));
+					attron(COLOR_PAIR(3));
+					makeBorder( this->getU()/2 - play.size()/2 - 2, ((this->getV() - 1)/2)*this->getV()/this->getV() - 1, this->getU()/2 + play.size()/2 + 3, ((this->getV() - 1)/2)*this->getV()/this->getV() + 2);
+					attroff(COLOR_PAIR(3));
+					mvprintw( ((this->getV() - 1)/2)*this->getV()/this->getV(), this->getU()/2 - play.size()/2 ,"%s", play.c_str() );
+					attroff(COLOR_PAIR(2));
+					attroff(COLOR_PAIR(1));
+				} else {
+					i = 1;
+					attron(COLOR_PAIR(1));
+					makeBorder( 0, 0, this->getU(), this->getV() );
+					attroff(COLOR_PAIR(1));
+				}
+		}
+		refresh();
+	}
 }
 
 /**
