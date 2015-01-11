@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/11 16:27:43 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/11 16:29:24 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ Screen					&Screen::operator=(Screen const & rhs)
 
 void					Screen::initGame(void)
 {
-	this->printMenu();
 	this->setTime(std::time(0));
+	this->printIntro();
 	this->setPlayer(new Squares(new Player(), 10, 11));
 	this->setSquares(this->getPlayer());
 	for (int i = 0; i < this->getU(); ++i)
@@ -372,7 +372,7 @@ void					Screen::makeBorder( int xmin, int ymin, int xmax, int ymax )
 	}
 }
 
-void		 			Screen::printMenu( void )
+void		 			Screen::printIntro( void )
 {
 
 	int 	i;
@@ -382,7 +382,7 @@ void		 			Screen::printMenu( void )
 
 	std::string	play("Press ENTER to play");
 
-	while ( ch != Screen::ESC ) {	
+	while ( 42 ) {	
 		
 		timeout(500);
 		ch = getch();
@@ -415,6 +415,45 @@ void		 			Screen::printMenu( void )
 		}
 		refresh();
 	}
+}
+
+void		 Screen::printOutro( void )
+{
+	int 	ch;
+	int 	ptime;
+
+	ptime = std::time(0) - this->getTime();
+
+	std::string	msg("GAME OVER");
+	std::string quit("Press ENTER to quit");
+
+	while ( 42 ) {	
+		
+		ch = getch();
+
+		clear();
+
+		switch ( ch ) {
+
+			case Screen::ENTER:
+				return;
+
+			default:
+				attron(COLOR_PAIR(1));
+				makeBorder( 0, 0, this->getU(), this->getV() );
+				attron(COLOR_PAIR(2));
+				//attron(COLOR_PAIR(3));
+				//makeBorder( this->getU()/2 - msg.size()/2 - 2, ((this->getV() - 1)/2)*this->getV()/this->getV() - 1, this->getU()/2 + msg.size()/2 + 3, ((this->getV() - 1)/2)*this->getV()/this->getV() + 2);
+				//attroff(COLOR_PAIR(3));
+				mvprintw( ((this->getV() - 1)/2 - 5)*this->getV()/this->getV(), this->getU()/2 - msg.size()/2 ,"%s", msg.c_str() );
+				mvprintw( ((this->getV() - 1)/2 - 1)*this->getV()/this->getV(), this->getU()/2 - msg.size()/2 ,"Score: %d", this->getScore() );
+				mvprintw( ((this->getV() - 1)/2 + 1)*this->getV()/this->getV(), this->getU()/2 - msg.size()/2 ,"Time:  %d", ptime );
+				mvprintw( ((this->getV() - 1)/2 + 5)*this->getV()/this->getV(), this->getU()/2 - quit.size()/2 , quit.c_str() );
+				attroff(COLOR_PAIR(2));
+				attroff(COLOR_PAIR(1));
+		}
+	}
+	refresh();
 }
 
 /**

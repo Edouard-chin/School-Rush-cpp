@@ -17,7 +17,6 @@
 #include "Screen.class.hpp"
 #include "Squares.class.hpp"
 
-#include <cstdlib>
 
 int main(int argc, char **argv)
 {
@@ -30,6 +29,7 @@ int main(int argc, char **argv)
 	s->initGame();
 	while(s->newTurn() != Screen::ESC) {
 	}
+	s->printOutro();
 	s->quitGame();
 	delete s;
 
