@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/11 12:46:01 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/11 14:53:04 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,9 +202,13 @@ void					Screen::generateNewMonster()
 {
 	int					randomY;
 	int					randomValid;
+	int					difficulty;
 
+	difficulty = 15 - (this->getScore() / 2);
+	if (difficulty <= 0)
+		difficulty = 1;
 	randomY = ((std::rand() % (this->getV() - 10)) + 5);
-	randomValid = ((std::rand() % 15) + randomY);
+	randomValid = ((std::rand() % difficulty) + randomY);
 	if (randomY == randomValid)
 		this->popSquares(new Squares(new Monster(), this->getU() - 1, randomY));
 	return ;
