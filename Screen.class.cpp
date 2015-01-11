@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/11 11:56:45 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/11 12:46:01 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void					Screen::printAll(void)
 		this->cursesPrint(tmp->getX(), tmp->getY(), tmp->getEntity()->getLetter(), tmp->getEntity()->getColor());
 		tmp = tmp->getNext();
 	}
-	std::cout << std::endl;
 	return ;
 }
 
@@ -217,12 +216,12 @@ void					Screen::checkCollision()
 
 	while(tmp)
 	{
-		if (tmp->getEntity()->getLetter() == Entity::PLAYER
-			|| tmp->getEntity()->getLetter() == Entity::SHOOT)
+		if (tmp->getEntity()->getLetter() == AEntity::PLAYER
+			|| tmp->getEntity()->getLetter() == AEntity::SHOOT)
 		{
 			if ((collide = this->checkCollision(tmp)))
 			{
-				if (tmp->getEntity()->getLetter() == Entity::PLAYER)
+				if (tmp->getEntity()->getLetter() == AEntity::PLAYER)
 					this->setPlayer(NULL);
 				this->killSquares(collide);
 				this->killSquares(tmp);
@@ -232,7 +231,7 @@ void					Screen::checkCollision()
 	}	
 }
 
-Squares *				Screen::checkCollision(Squares * s)
+Squares *				Screen::checkCollision(Squares * s) const
 {
 	Squares *			tmp = this->getSquares();
 
@@ -245,7 +244,7 @@ Squares *				Screen::checkCollision(Squares * s)
 	return (NULL);
 }
 
-int						Screen::checkContinue(int key)
+int						Screen::checkContinue(int key) const
 {
 	if (this->getPlayer() == NULL)
 		return (Screen::ESC);
@@ -272,12 +271,12 @@ int						Screen::newTurn()
 	else if (key == Screen::SPACE)
 		this->popSquares(new Squares(new Shoot(), player->getX() + 1, player->getY()));
 
-	this->moveSquares(Entity::WALL);
-	this->moveSquares(Entity::MONSTER);
+	this->moveSquares(AEntity::WALL);
+	this->moveSquares(AEntity::MONSTER);
 	this->checkCollision();
 	this->generateNewWalls();
 	this->generateNewMonster();
-	this->moveSquares(Entity::SHOOT);
+	this->moveSquares(AEntity::SHOOT);
 	this->checkCollision();
 	this->clearScreen();
 	this->printAll();

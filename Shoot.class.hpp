@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Shoot.class.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/10 13:05:57 by echin             #+#    #+#             */
-/*   Updated: 2015/01/10 17:31:28 by echin            ###   ########.fr       */
+/*   Created: 2015/01/10 13:05:57 by aribon            #+#    #+#             */
+/*   Updated: 2015/01/11 12:54:33 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHOOT_CLASS_HPP
 # define SHOOT_CLASS_HPP
-# include "Entity.class.hpp"
+# include "AEntity.class.hpp"
 
-class Shoot : public Entity
+class Shoot : public AEntity
 {
 
 public:
@@ -25,7 +25,9 @@ public:
 	int		getDamage(void) const;
 	void	setDamage(int damage);
 
-protected:
+	char		die();
+
+private:
 	int	_damage;
 };
 

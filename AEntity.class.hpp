@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Entity.class.hpp                                   :+:      :+:    :+:   */
+/*   AEntity.class.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/10 11:37:54 by echin             #+#    #+#             */
-/*   Updated: 2015/01/10 17:29:47 by echin            ###   ########.fr       */
+/*   Created: 2015/01/10 11:37:54 by aribon            #+#    #+#             */
+/*   Updated: 2015/01/11 13:25:55 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENTITY_CLASS_HPP
-# define ENTITY_CLASS_HPP
+#ifndef A_ENTITY_CLASS_HPP
+# define A_ENTITY_CLASS_HPP
 # include <iostream>
 
-class Entity
+class AEntity
 {
-
 public:
-	Entity(char letter, int velocity, int color, int mhp, int chp);
-	virtual ~Entity(void);
-	Entity(Entity const &entity);
-	Entity const &operator=(Entity const &entity);
+	AEntity(char letter, int velocity, int color, int mhp, int chp);
+	virtual ~AEntity(void);
+	AEntity(AEntity const &entity);
+	AEntity const &operator=(AEntity const &entity);
 	char		getLetter(void) const;
-	void		setLetter(char letter);
+	void		setLetter(char const letter);
 	int			getVelocity(void) const;
-	void		setVelocity(int velocity);
+	void		setVelocity(int const velocity);
 	int 		getColor(void) const;
-	void		setColor(int color);
+	void		setColor(int const color);
 	int			getMhp(void) const;
-	void		setMhp(int mhp);
+	void		setMhp(int const mhp);
 	int			getChp(void) const;
-	void		setChp(int chp);
+	void		setChp(int const chp);
+
+	virtual char		die() = 0;
 
 	static const	char		MONSTER;
 	static const 	char 		PLAYER;
@@ -47,6 +48,9 @@ protected:
 	int         _color;
 	int			_mhp;
 	int			_chp;
+
+private:
+	AEntity(void);
 
 };
 
