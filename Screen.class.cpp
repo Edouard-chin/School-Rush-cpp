@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/10 20:48:05 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/11 11:56:45 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ Screen::Screen(void) : _u(80), _v(25), _squares(NULL)
 
 Screen::Screen(int u, int v) : _u(u), _v(v), _squares(NULL)
 {
+	if (_u <= 0)
+		_u = 80;
+	if (_v <= 0)
+		_v = 25;
 	std::srand(std::time(0));
 	this->initTerm(_u, _v);
 
@@ -86,6 +90,19 @@ void					Screen::initGame(void)
 	return ;
 }
 
+void					Screen::quitGame(void)
+{
+	Squares *			tmp = this->getSquares();
+	Squares *			nxt = NULL;
+
+	while(tmp)
+	{
+		nxt = tmp->getNext();
+		this->killSquares(tmp);
+		tmp = nxt;
+	}
+}
+
 void					Screen::printAll(void)
 {
 	Squares *			tmp = this->getSquares();
@@ -93,7 +110,7 @@ void					Screen::printAll(void)
 	clear();
 	while(tmp)
 	{
-		this->curses_print(tmp->getX(), tmp->getY(), tmp->getEntity()->getLetter(), tmp->getEntity()->getColor());
+		this->cursesPrint(tmp->getX(), tmp->getY(), tmp->getEntity()->getLetter(), tmp->getEntity()->getColor());
 		tmp = tmp->getNext();
 	}
 	std::cout << std::endl;
@@ -158,6 +175,18 @@ void					Screen::clearScreen()
 	}
 }
 
+void					Screen::moveSquares(char const type)
+{
+	Squares *			tmp = this->getSquares();
+
+	while(tmp)
+	{
+		if (tmp->getEntity()->getLetter() == type)
+			tmp->move();
+		tmp = tmp->getNext();
+	}
+}
+
 void					Screen::generateNewWalls()
 {
 	int nbOfWallsUp = (std::rand() % 4) + 2;
@@ -169,7 +198,7 @@ void					Screen::generateNewWalls()
 		this->popSquares(new Squares(new Wall(), this->getU() - 1, this->getV() - 1 - i));
 }
 
-void						Screen::generateNewMonster()
+void					Screen::generateNewMonster()
 {
 	int					randomY;
 	int					randomValid;
@@ -178,7 +207,6 @@ void						Screen::generateNewMonster()
 	randomValid = ((std::rand() % 15) + randomY);
 	if (randomY == randomValid)
 		this->popSquares(new Squares(new Monster(), this->getU() - 1, randomY));
-	// TODO check si case deja prise en Y
 	return ;
 }
 
@@ -194,6 +222,8 @@ void					Screen::checkCollision()
 		{
 			if ((collide = this->checkCollision(tmp)))
 			{
+				if (tmp->getEntity()->getLetter() == Entity::PLAYER)
+					this->setPlayer(NULL);
 				this->killSquares(collide);
 				this->killSquares(tmp);
 			}
@@ -215,17 +245,23 @@ Squares *				Screen::checkCollision(Squares * s)
 	return (NULL);
 }
 
+int						Screen::checkContinue(int key)
+{
+	if (this->getPlayer() == NULL)
+		return (Screen::ESC);
+	else if (this->getPlayer()->getX() < 0 || this->getPlayer()->getX() > this->getU())
+		return (Screen::ESC);
+	else
+		return (key);
+}
+
 int						Screen::newTurn()
 {
-	Squares *			tmp = this->getSquares();
 	Squares *			player = this->getPlayer();
 	int					key;
 
-	key = this->curses_input();
-	std::cout << key << std::endl;
-	if (key == Screen::ESC)
-		return (key);
-	else if (key == Screen::DOWN)
+	key = this->cursesInput();
+	if (key == Screen::DOWN)
 		player->move(0, 1);
 	else if (key == Screen::UP)
 		player->move(0, -1);
@@ -236,16 +272,16 @@ int						Screen::newTurn()
 	else if (key == Screen::SPACE)
 		this->popSquares(new Squares(new Shoot(), player->getX() + 1, player->getY()));
 
-	while(tmp)
-	{
-		tmp->move();
-		tmp = tmp->getNext();
-	}
-	this->clearScreen();
+	this->moveSquares(Entity::WALL);
+	this->moveSquares(Entity::MONSTER);
+	this->checkCollision();
 	this->generateNewWalls();
 	this->generateNewMonster();
+	this->moveSquares(Entity::SHOOT);
 	this->checkCollision();
+	this->clearScreen();
 	this->printAll();
+	key = this->checkContinue(key);
 
 	return (key);
 }
@@ -269,7 +305,7 @@ void 					Screen::initTerm( int u, int v )
     init_pair(6, 6, 0); /* CYAN */
 }
 
-void 					Screen::curses_print( int x, int y, char c, int color)
+void 					Screen::cursesPrint( int x, int y, char c, int color)
 {
 	attron(COLOR_PAIR(color));
 	mvprintw( y, x, "%c", c );
@@ -279,7 +315,7 @@ void 					Screen::curses_print( int x, int y, char c, int color)
 	return;
 }
 
-int 					Screen::curses_input( void )
+int 					Screen::cursesInput( void )
 {
 	int ch;
 
