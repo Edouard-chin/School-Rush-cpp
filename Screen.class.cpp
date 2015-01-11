@@ -224,7 +224,7 @@ void					Screen::checkCollision()
 			{
 				if (tmp->getEntity()->getLetter() == AEntity::PLAYER)
 					this->setPlayer(NULL);
-				else if (collide->getEntity()->getLetter() == Entity::MONSTER)
+				else if (collide->getEntity()->getLetter() == AEntity::MONSTER)
 					this->setScore(this->getScore() + 1);
 				this->killSquares(collide);
 				this->killSquares(tmp);
