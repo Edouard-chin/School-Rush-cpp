@@ -35,6 +35,7 @@ public:
 
 	int					getU() const;
 	int					getV() const;
+	int 				getScore() const;
 	Squares *			getSquares() const;
 	Squares *			getLastSquares(void) const;
 	Squares *			getPlayer() const;
@@ -43,6 +44,7 @@ public:
 	void				setV(int const v);
 	void				setSquares(Squares *);
 	void				setPlayer(Squares *);
+	void				setScore(int const score);
 
 	void				initGame();
 	void				quitGame();
@@ -82,6 +84,7 @@ public:
 private:
 	int					_u;
 	int					_v;
+	int 				_score;
 	Squares	*			_squares;
 	Squares *			_player;
 
