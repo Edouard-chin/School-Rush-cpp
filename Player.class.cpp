@@ -6,13 +6,13 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 12:59:46 by aribon            #+#    #+#             */
-/*   Updated: 2015/01/11 12:59:47 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/11 15:20:16 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Player.class.hpp"
 
-Player::Player(void) : AEntity(Player::PLAYER, 0, Player::GREEN, 1, 1)
+Player::Player(void) : AEntity(Player::PLAYER, 0, Player::GREEN, 3, 3)
 {
 
 }

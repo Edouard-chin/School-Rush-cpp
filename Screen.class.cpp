@@ -6,12 +6,11 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/11 14:53:04 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/11 15:27:38 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Screen.class.hpp"
-#include <stdlib.h>
 
 const	int			Screen::ESC = 27;
 const	int			Screen::UP = 259;
@@ -26,7 +25,7 @@ const	int			Screen::SPACE = 32;
 *********************  CONSTRUCTORS / DESTRUCTORS  ********************
 */
 
-Screen::Screen(void) : _u(80), _v(25), _score(0), _squares(NULL)
+Screen::Screen(void) : _u(80), _v(25), _score(0), _time(std::time(0)), _squares(NULL)
 {	
 	std::srand(std::time(0));
 	this->initTerm(_u, _v);
@@ -46,7 +45,7 @@ Screen::Screen(int u, int v) : _u(u), _v(v), _score(0), _squares(NULL)
 	return ;
 }
 
-Screen::Screen(Screen const & src) : _u(src.getU()), _v(src.getV()), _score(src.getScore()), _squares(src.getSquares())
+Screen::Screen(Screen const & src) : _u(src.getU()), _v(src.getV()), _score(src.getScore()), _time(src.getTime()), _squares(src.getSquares())
 {
 	std::srand(std::time(0));
 	return ;
@@ -115,7 +114,10 @@ void					Screen::printAll(void)
 		tmp = tmp->getNext();
 	}
 	attron(COLOR_PAIR(6));
-	mvprintw( this->getV() + 1, 5,"Score: %d", this->getScore() );
+	mvprintw( this->getV(), 5,"Score: %d", this->getScore() );
+	mvprintw( this->getV() + 1, 5,"Time:  %d", std::time(0) - this->getTime() );
+	if (this->getPlayer())
+		mvprintw( this->getV() + 2, 5,"Life:  %d", this->getPlayer()->getEntity()->getChp() );
 	attron(COLOR_PAIR(6));
 	return ;
 }
@@ -230,7 +232,9 @@ void					Screen::checkCollision()
 			if ((collide = this->checkCollision(tmp)))
 			{
 				if (tmp->getEntity()->getLetter() == AEntity::PLAYER)
+				{
 					this->setPlayer(NULL);
+				}
 				else if (collide->getEntity()->getLetter() == AEntity::MONSTER)
 					this->setScore(this->getScore() + 1);
 				this->killSquares(collide);
@@ -353,6 +357,11 @@ int 					Screen::getScore() const
 	return (this->_score);
 }
 
+int 					Screen::getTime() const
+{
+	return (this->_time);
+}
+
 Squares *				Screen::getSquares() const
 {
 	return (this->_squares);
@@ -388,6 +397,16 @@ void					Screen::setV(int const v)
 	this->_v = v;
 }
 
+void					Screen::setScore( int const score )
+{
+	this->_score = score;
+}
+
+void					Screen::setTime( int const t )
+{
+	this->_time = t;
+}
+
 void					Screen::setSquares(Squares * squares)
 {
 	this->_squares = squares;
@@ -396,11 +415,6 @@ void					Screen::setSquares(Squares * squares)
 void					Screen::setPlayer(Squares * player)
 {
 	this->_player = player;
-}
-
-void					Screen::setScore( int const score )
-{
-	this->_score = score;
 }
 
 /**

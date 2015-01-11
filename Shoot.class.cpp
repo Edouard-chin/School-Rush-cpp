@@ -6,13 +6,13 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 13:06:05 by aribon            #+#    #+#             */
-/*   Updated: 2015/01/11 13:00:43 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/11 15:20:26 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Shoot.class.hpp"
 
-Shoot::Shoot(void) : AEntity(Shoot::SHOOT, -1, Shoot::RED, 50, 50)
+Shoot::Shoot(void) : AEntity(Shoot::SHOOT, -1, Shoot::RED, 1, 1)
 {
 
 }

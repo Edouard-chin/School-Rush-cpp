@@ -6,13 +6,13 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 13:05:45 by aribon            #+#    #+#             */
-/*   Updated: 2015/01/11 13:26:08 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/11 15:20:07 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Monster.class.hpp"
 
-Monster::Monster(void) : AEntity(Monster::MONSTER, 1, Monster::RED, 50, 50)
+Monster::Monster(void) : AEntity(Monster::MONSTER, 1, Monster::RED, 1, 1)
 {
 
 }
