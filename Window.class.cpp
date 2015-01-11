@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 00:28:26 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 03:30:43 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 00:30:10 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void    Window::screenInit(int sizeX, int sizeY)
     initscr();
     noecho();
     raw();
+    nodelay(stdscr,TRUE);
     keypad(stdscr, TRUE);
     if (getenv("ESCDELAY") == NULL) {
         ESCDELAY = 1;

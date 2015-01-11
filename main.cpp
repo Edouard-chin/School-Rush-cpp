@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 01:30:45 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 23:31:39 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 00:50:39 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int main()
             moveObjects(objects.monster[n].getPosX(), objects.monster[n].getPosY(), objects.monster[n].getColor(), objects.monster[n].getLetter());
         }
         for (int n = 0; n < objects.i; n++) {
-            *objects.shoot[n] += 1;
+            *objects.shoot[n] += objects.monster;
             moveObjects(objects.shoot[n]->getPosX(), objects.shoot[n]->getPosY(), objects.shoot[n]->getColor(), objects.shoot[n]->getLetter());
         }
         moveObjects(objects.player->getPosX(), objects.player->getPosY(), objects.player->getColor(), objects.player->getLetter());
@@ -74,7 +74,7 @@ int main()
         }
 
         dead = collision(objects);
-        timeout(Window::DIFFICULTY);
+        usleep(27000);
     }
 
     delete objects.player;
@@ -84,7 +84,6 @@ int main()
 
 bool  collision(Object objects)
 {
-
     int playerPosX = objects.player->getPosX();
     int playerPosY = objects.player->getPosY();
 

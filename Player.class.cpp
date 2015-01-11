@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 03:34:35 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 06:22:59 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 00:38:28 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ Player &operator-=(Player &player, int n)
     if (player.getPosX() - n < 0) {
         player.setPosX(0);
     } else {
-        player.setPosX(player.getPosX() - n - player.getVelocity());
+        player.setPosX(player.getPosX() - n);
     }
 
     return player;
@@ -56,7 +56,7 @@ Player &operator+=(Player &player, int n)
     if (player.getPosX() + n > 100) {
         player.setPosX(100);
     } else {
-        player.setPosX(player.getPosX() + n + player.getVelocity());
+        player.setPosX(player.getPosX() + n);
     }
 
     return player;
