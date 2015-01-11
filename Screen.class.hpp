@@ -26,8 +26,8 @@
 
 class Screen {
 public:
-	Screen(void);					// taille par default 80 / 25
-	Screen(int, int);				// taille en entree
+	Screen(void);
+	Screen(int, int);
 	Screen(Screen const & src);
 	virtual ~Screen(void);
 
@@ -35,8 +35,8 @@ public:
 
 	int					getU() const;
 	int					getV() const;
-	Squares *			getSquares() const;				// return first
-	Squares *			getLastSquares(void) const;		// return the last
+	Squares *			getSquares() const;
+	Squares *			getLastSquares(void) const;
 	Squares *			getPlayer() const;
 
 	void				setU(int const u);
@@ -45,30 +45,31 @@ public:
 	void				setPlayer(Squares *);
 
 	void				initGame();
+	void				quitGame();
+
+	Squares *			popSquares(Squares *);
+	Squares *			pushSquares(Squares *);
+
+	Squares *			killSquares(Squares *);
+
+	int					newTurn();
 
 	void				printAll();
+	void				clearScreen();
 
-	Squares *			popSquares(Squares *);		// return the new first
-	Squares *			pushSquares(Squares *);		// return the new last
+	void				moveSquares(char const type);
 
-	Squares *			killSquares(Squares *);		// delete and chain this Squares
-													// return the prev square of delete one
-	void				clearScreen();				// clear outside Squares in x only
+	void				generateNewWalls();
+	void				generateNewMonster();
 
-	void				generateNewWalls();			// after clear, create wall in last X
+	void				checkCollision();
+	Squares *			checkCollision(Squares *);
 
-	void				generateNewMonster();		// check how many M exists and create if need
+	int					checkContinue(int);
 
-	void				checkCollision();			// check all collisions
-	Squares *			checkCollision(Squares *);	// check if one Square is in collision
-													// return NULL or the ptr of collision
-	int					newTurn();					// return keyboard
-
-	void 				initTerm(int u, int v);
-	void 				curses_print( int x, int y, char c, int color);
-	int 				curses_input( void );
-
-	// TODO changer nom deux fct ci dessus camelcase
+	void 				initTerm( int u, int v );
+	void 				cursesPrint( int x, int y, char c, int color );
+	int 				cursesInput( void );
 
 	static const int 	ESC;
 	static const int 	UP;
@@ -90,24 +91,3 @@ std::ostream			&operator<<(std::ostream & o, Screen const & rhs);
 std::ostream			&operator<<(std::ostream & o, Squares const * rhs);
 
 #endif
-
-/*
-___
-
-j'init avec une map de base
-
-j'affiche le tout
-
-on move le tout, car element vers la gauche, sauf player et shoot
-
-on recree un nombre entre 1 et 3 cases en position MAX en haut et en bas
-
-on check le nombre d'ennemis encore en vie pour en recreer si besoin
-
-fct push new Squares
-
-je parse chaque case voir si ca sort ou si die, ou si collision
-
-si sort, x < 0, on refait le chainage en deletant proprement
-
-*/
