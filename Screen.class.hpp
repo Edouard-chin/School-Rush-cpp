@@ -75,7 +75,8 @@ public:
 	void 				cursesPrint( int x, int y, char c, int color );
 	int 				cursesInput( void );
 	
-	void		 		printMenu( void );
+	void		 		printIntro( void );
+	void		 		printOutro( void );
 	void				makeBorder( int xmin, int ymin, int xmax, int ymax );
 
 	static const int 	ESC;
