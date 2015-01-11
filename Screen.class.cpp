@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/11 15:45:43 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/11 16:27:43 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ Screen::Screen(void) : _u(80), _v(25), _score(0), _time(std::time(0)), _squares(
 	return ;
 }
 
-Screen::Screen(int u, int v) : _u(u), _v(v), _score(0), _squares(NULL)
+Screen::Screen(int u, int v) : _u(u), _v(v), _score(0), _time(std::time(0)), _squares(NULL)
 {
-	if (_u <= 0)
+	if (_u < 20)
 		_u = 80;
-	if (_v <= 0)
+	if (_v <= 15)
 		_v = 25;
 	std::srand(std::time(0));
 	this->initTerm(_u, _v);
@@ -79,6 +79,7 @@ Screen					&Screen::operator=(Screen const & rhs)
 void					Screen::initGame(void)
 {
 	this->printMenu();
+	this->setTime(std::time(0));
 	this->setPlayer(new Squares(new Player(), 10, 11));
 	this->setSquares(this->getPlayer());
 	for (int i = 0; i < this->getU(); ++i)
