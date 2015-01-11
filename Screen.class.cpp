@@ -114,6 +114,9 @@ void					Screen::printAll(void)
 		this->cursesPrint(tmp->getX(), tmp->getY(), tmp->getEntity()->getLetter(), tmp->getEntity()->getColor());
 		tmp = tmp->getNext();
 	}
+	attron(COLOR_PAIR(6));
+	mvprintw( this->getV() + 1, 5,"Score: %d", this->getScore() );
+	attron(COLOR_PAIR(6));
 	return ;
 }
 
@@ -297,7 +300,7 @@ void 					Screen::initTerm( int u, int v )
 	}
 	noecho(); /* No echo in the screen */
 	curs_set(0); /* Hide the cursor */
-	resizeterm(v, u); /* Resize the ncurse grid */
+	resizeterm(v + 3, u); /* Resize the ncurse grid */
 	start_color(); 		/* Init color */
     init_pair(1, 1, 0); /* RED */
     init_pair(2, 2, 0); /* GREEN */
