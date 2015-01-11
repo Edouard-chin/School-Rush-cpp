@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/11 16:29:24 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/11 16:30:29 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ Screen					&Screen::operator=(Screen const & rhs)
 
 void					Screen::initGame(void)
 {
-	this->setTime(std::time(0));
 	this->printIntro();
+	this->setTime(std::time(0));
 	this->setPlayer(new Squares(new Player(), 10, 11));
 	this->setSquares(this->getPlayer());
 	for (int i = 0; i < this->getU(); ++i)
