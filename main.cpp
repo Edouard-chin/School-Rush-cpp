@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 01:30:45 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 03:52:33 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/11 05:16:24 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int main()
     Shoot   *shoot       = new Shoot(50, 10);
     int     input        = 0;
 
+
     while (input != Window::ESCAPE) {
         attron(COLOR_PAIR(megaMonster->getColor()));
         mvprintw(megaMonster->getPosY(), megaMonster->getPosX(), "%c", megaMonster->getLetter());
@@ -29,8 +30,8 @@ int main()
         *megaMonster -= 1;
         attroff(COLOR_PAIR(megaMonster->getColor()));
         timeout(Window::DIFFICULTY);
-        erase();
         input = wgetch(stdscr);
+        erase();
     }
 
     return 0;
