@@ -26,7 +26,7 @@ const	int			Screen::SPACE = 32;
 *********************  CONSTRUCTORS / DESTRUCTORS  ********************
 */
 
-Screen::Screen(void) : _u(80), _v(25), _squares(NULL)
+Screen::Screen(void) : _u(80), _v(25), _score(0), _squares(NULL)
 {	
 	std::srand(std::time(0));
 	this->initTerm(_u, _v);
@@ -34,7 +34,7 @@ Screen::Screen(void) : _u(80), _v(25), _squares(NULL)
 	return ;
 }
 
-Screen::Screen(int u, int v) : _u(u), _v(v), _squares(NULL)
+Screen::Screen(int u, int v) : _u(u), _v(v), _score(0), _squares(NULL)
 {
 	if (_u <= 0)
 		_u = 80;
@@ -46,7 +46,7 @@ Screen::Screen(int u, int v) : _u(u), _v(v), _squares(NULL)
 	return ;
 }
 
-Screen::Screen(Screen const & src) : _u(src.getU()), _v(src.getV()), _squares(src.getSquares())
+Screen::Screen(Screen const & src) : _u(src.getU()), _v(src.getV()), _score(src.getScore()), _squares(src.getSquares())
 {
 	std::srand(std::time(0));
 	return ;
@@ -68,6 +68,7 @@ Screen					&Screen::operator=(Screen const & rhs)
 {
 	this->setU(rhs.getU());
 	this->setV(rhs.getV());
+	this->setScore(rhs.getScore());
 	this->setSquares(rhs.getSquares());
 	return (*this);
 }
@@ -223,6 +224,8 @@ void					Screen::checkCollision()
 			{
 				if (tmp->getEntity()->getLetter() == AEntity::PLAYER)
 					this->setPlayer(NULL);
+				else if (collide->getEntity()->getLetter() == Entity::MONSTER)
+					this->setScore(this->getScore() + 1);
 				this->killSquares(collide);
 				this->killSquares(tmp);
 			}
@@ -338,6 +341,11 @@ int						Screen::getV() const
 	return (this->_v);
 }
 
+int 					Screen::getScore() const
+{
+	return (this->_score);
+}
+
 Squares *				Screen::getSquares() const
 {
 	return (this->_squares);
@@ -381,6 +389,11 @@ void					Screen::setSquares(Squares * squares)
 void					Screen::setPlayer(Squares * player)
 {
 	this->_player = player;
+}
+
+void					Screen::setScore( int const score )
+{
+	this->_score = score;
 }
 
 /**
