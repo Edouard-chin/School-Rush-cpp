@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Wall.class.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/10 13:06:16 by echin             #+#    #+#             */
-/*   Updated: 2015/01/10 17:31:53 by echin            ###   ########.fr       */
+/*   Created: 2015/01/10 13:06:16 by aribon            #+#    #+#             */
+/*   Updated: 2015/01/11 12:54:26 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WALL_CLASS_HPP
 # define WALL_CLASS_HPP
-# include "Entity.class.hpp"
+# include "AEntity.class.hpp"
 
-class Wall : public Entity
+class Wall : public AEntity
 {
 
 public:
@@ -22,6 +22,8 @@ public:
 	virtual ~Wall(void);
 	Wall (Wall const &wall);
 	Wall const &operator=(Wall const &wall);
+
+	char		die();
 
 };
 

@@ -63,9 +63,9 @@ public:
 	void				generateNewMonster();
 
 	void				checkCollision();
-	Squares *			checkCollision(Squares *);
+	Squares *			checkCollision(Squares *) const;
 
-	int					checkContinue(int);
+	int					checkContinue(int) const;
 
 	void 				initTerm( int u, int v );
 	void 				cursesPrint( int x, int y, char c, int color );
