@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 00:49:35 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 05:39:51 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/11 21:34:47 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ public:
     void        setPosY(int posY);
     void        die();
     int         generateCoordinate(int min, int max);
-
 
     static const    char        MONSTER;
     static const    char        PLAYER;

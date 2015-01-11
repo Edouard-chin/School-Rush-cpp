@@ -6,13 +6,13 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 03:32:01 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 03:38:57 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/11 21:36:29 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Wall.class.hpp"
 
-Wall::Wall(int posX, int posY) : Entity(Wall::WALL, 1, Wall::BLUE, 1, 1, posX, posY)
+Wall::Wall() : Entity(Wall::WALL, 1, Wall::BLUE, 1, 1, this->generateCoordinate(0, 100), this->generateCoordinate(0, 30))
 {
 
 }
@@ -36,6 +36,17 @@ Wall const &Wall::operator=(Wall const &wall)
     this->_chp = wall.getChp();
     this->_posX = wall.getPosX();
     this->_posY = wall.getPosY();
+
+    return wall;
+}
+
+Wall &operator-=(Wall &wall, int n)
+{
+    if (wall.getPosX() - n < 0) {
+        wall.die();
+    } else {
+        wall.setPosX(wall.getPosX() - n);
+    }
 
     return wall;
 }

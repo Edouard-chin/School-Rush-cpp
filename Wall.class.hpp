@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 03:31:53 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 03:33:26 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/11 21:35:04 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ class Wall : public Entity
 {
 
 public:
-    Wall(int posX, int posY);
+    Wall();
     virtual ~Wall(void);
     Wall (Wall const &wall);
     Wall const &operator=(Wall const &wall);
 
 };
+Wall &operator-=(Wall &wall, int n);
 
 #endif

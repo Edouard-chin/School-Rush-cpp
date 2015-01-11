@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 00:49:40 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 05:40:26 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/11 21:34:42 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ Entity const & Entity::operator=(Entity const & entity)
 
     return entity;
 }
+
 
 char        Entity::getLetter(void) const
 {
