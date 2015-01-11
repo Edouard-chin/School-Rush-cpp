@@ -17,8 +17,6 @@ SRC = AEntity.class.cpp Monster.class.cpp Player.class.cpp Shoot.class.cpp \
 OBJ = $(SRC:.cpp=.o)
 LFLAGS = -lncurses
 
-
-
 all: $(NAME)
 
 $(NAME): $(OBJ)

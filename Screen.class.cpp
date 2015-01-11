@@ -6,7 +6,7 @@
 /*   By: fbaudet- <fbaudet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 11:45:44 by fbaudet-          #+#    #+#             */
-/*   Updated: 2015/01/11 16:30:29 by fbaudet-         ###   ########.fr       */
+/*   Updated: 2015/01/11 17:29:15 by fbaudet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,13 @@ void					Screen::clearScreen()
 {
 	Squares *			tmp = this->getSquares();
 
+	if (this->getPlayer())
+	{
+		if (this->getPlayer()->getX() < 0)
+			this->getPlayer()->setX(0);
+		else if (this->getPlayer()->getX() >= this->getU() )
+			this->getPlayer()->setX(this->getU() - 1);
+	}
 	while(tmp)
 	{
 		if (tmp->getX() < 0 || tmp->getX() >= this->getU())
@@ -310,21 +317,21 @@ int						Screen::newTurn()
 
 void 					Screen::initTerm( int u, int v )
 {
-	initscr(); /* Init the screen */
+	initscr();
 	keypad(stdscr, TRUE);
 	if (getenv("ESCDELAY") == NULL) {
 		ESCDELAY = 1;
 	}
-	noecho(); /* No echo in the screen */
-	curs_set(0); /* Hide the cursor */
-	resizeterm(v + 3, u); /* Resize the ncurse grid */
-	start_color(); 		/* Init color */
-    init_pair(1, 1, 0); /* RED */
-    init_pair(2, 2, 0); /* GREEN */
-    init_pair(3, 3, 0); /* YELLOW */
-    init_pair(4, 4, 0); /* BLUE */
-    init_pair(5, 5, 0); /* MAGENTA */
-    init_pair(6, 6, 0); /* CYAN */
+	noecho();
+	curs_set(0);
+	resizeterm(v + 3, u);
+	start_color();
+    init_pair(1, 1, 0);
+    init_pair(2, 2, 0);
+    init_pair(3, 3, 0);
+    init_pair(4, 4, 0);
+    init_pair(5, 5, 0);
+    init_pair(6, 6, 0);
 }
 
 void 					Screen::cursesPrint( int x, int y, char c, int color)
@@ -374,7 +381,6 @@ void					Screen::makeBorder( int xmin, int ymin, int xmax, int ymax )
 
 void		 			Screen::printIntro( void )
 {
-
 	int 	i;
 	int 	ch;
 
@@ -442,9 +448,6 @@ void		 Screen::printOutro( void )
 				attron(COLOR_PAIR(1));
 				makeBorder( 0, 0, this->getU(), this->getV() );
 				attron(COLOR_PAIR(2));
-				//attron(COLOR_PAIR(3));
-				//makeBorder( this->getU()/2 - msg.size()/2 - 2, ((this->getV() - 1)/2)*this->getV()/this->getV() - 1, this->getU()/2 + msg.size()/2 + 3, ((this->getV() - 1)/2)*this->getV()/this->getV() + 2);
-				//attroff(COLOR_PAIR(3));
 				mvprintw( ((this->getV() - 1)/2 - 5)*this->getV()/this->getV(), this->getU()/2 - msg.size()/2 ,"%s", msg.c_str() );
 				mvprintw( ((this->getV() - 1)/2 - 1)*this->getV()/this->getV(), this->getU()/2 - msg.size()/2 ,"Score: %d", this->getScore() );
 				mvprintw( ((this->getV() - 1)/2 + 1)*this->getV()/this->getV(), this->getU()/2 - msg.size()/2 ,"Time:  %d", ptime );

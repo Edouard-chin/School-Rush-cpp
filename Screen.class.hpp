@@ -53,28 +53,21 @@ public:
 
 	Squares *			popSquares(Squares *);
 	Squares *			pushSquares(Squares *);
-
 	Squares *			killSquares(Squares *);
 
 	int					newTurn();
-
 	void				printAll();
 	void				clearScreen();
-
 	void				moveSquares(char const type);
-
 	void				generateNewWalls();
 	void				generateNewMonster();
-
 	void				checkCollision();
 	Squares *			checkCollision(Squares *) const;
-
 	int					checkContinue(int) const;
 
 	void 				initTerm( int u, int v );
 	void 				cursesPrint( int x, int y, char c, int color );
 	int 				cursesInput( void );
-	
 	void		 		printIntro( void );
 	void		 		printOutro( void );
 	void				makeBorder( int xmin, int ymin, int xmax, int ymax );
