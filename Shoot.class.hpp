@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 03:36:25 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 03:37:10 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/11 23:13:53 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,13 @@ public:
     Shoot const &operator=(Shoot const &shoot);
     int     getDamage(void) const;
     void    setDamage(int damage);
+    int     getNumber(void) const;
 
 protected:
     int _damage;
 };
+
+Shoot &operator+=(Shoot &shoot, int n);
+
 
 #endif

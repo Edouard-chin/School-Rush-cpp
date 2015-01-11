@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 01:30:45 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 21:59:48 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/11 23:31:39 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,40 +17,42 @@
 #include "Player.class.hpp"
 #include "Entity.class.hpp"
 #include <unistd.h>
+#include <stdlib.h>
 
-void movePlayer(Player *player, char key);
-void moveObjects(int posX, int posY, int color, char letter);
-void fiiire(Shoot *shoot);
 
-struct Babibel {
-   Wall wall[150];
-   Player *player;
+struct Object {
+   Wall    wall[20];
+   Player  *player;
    Monster monster[20];
-   Shoot *shoot;
+   Shoot   *shoot[40];
+   int     i;
 };
+
+void moveObjects(int posX, int posY, int color, char letter);
+bool collision(Object objects);
 
 
 int main()
 {
-    Babibel objects;
+    Object  objects;
     Window  window;
-    // Monster megaMonster[20];
-    // Wall    walls[150];
-    // Player  player(0, 0);
-    // Shoot   shoot(-1, -1);
     int     input        = 0;
+    bool    dead         = false;
+    objects.player       = new Player(0, 15);
+    objects.i            = 0;
 
-    objects.player = new Player(0, 0);
-    objects.player->setPosX(0);
-    objects.player->setPosY(0);
-    while (input != Window::ESCAPE) {
-        for (int i = 0; i < 150; i++) {
+    while (input != Window::ESCAPE && !dead) {
+        for (int i = 0; i < 20; i++) {
             objects.wall[i] -= 1;
             moveObjects(objects.wall[i].getPosX(), objects.wall[i].getPosY(), objects.wall[i].getColor(), objects.wall[i].getLetter());
         }
         for (int n = 0; n < 20; n++) {
             objects.monster[n] -= 1;
             moveObjects(objects.monster[n].getPosX(), objects.monster[n].getPosY(), objects.monster[n].getColor(), objects.monster[n].getLetter());
+        }
+        for (int n = 0; n < objects.i; n++) {
+            *objects.shoot[n] += 1;
+            moveObjects(objects.shoot[n]->getPosX(), objects.shoot[n]->getPosY(), objects.shoot[n]->getColor(), objects.shoot[n]->getLetter());
         }
         moveObjects(objects.player->getPosX(), objects.player->getPosY(), objects.player->getColor(), objects.player->getLetter());
         input = wgetch(stdscr);
@@ -63,10 +65,41 @@ int main()
             *objects.player + 1;
         else if (input == 258)
             *objects.player - 1;
+        else if (input == 32) {
+            if (objects.i == 40) {
+                objects.i = 0;
+            }
+            objects.shoot[objects.i] = new Shoot(objects.player->getPosX() + 1, objects.player->getPosY());
+            objects.i++;
+        }
+
+        dead = collision(objects);
         timeout(Window::DIFFICULTY);
     }
 
+    delete objects.player;
+
     return 0;
+}
+
+bool  collision(Object objects)
+{
+
+    int playerPosX = objects.player->getPosX();
+    int playerPosY = objects.player->getPosY();
+
+    for (int i = 0; i < 20; i++) {
+        if (objects.wall[i].getPosX() == playerPosX && objects.wall[i].getPosY() == playerPosY) {
+            return true;
+        }
+    }
+    for (int n = 0; n < 20; n++) {
+        if (objects.monster[n].getPosX() == playerPosX && objects.monster[n].getPosY() == playerPosY) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 void moveObjects(int posX, int posY, int color, char letter)
