@@ -6,13 +6,13 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 03:34:35 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 03:38:45 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/11 06:22:59 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Player.class.hpp"
 
-Player::Player(int posX, int posY) : Entity(Player::PLAYER, 0, Player::GREEN, 1, 1, posX, posY)
+Player::Player(int posX, int posY) : Entity(Player::PLAYER, 1, Player::GREEN, 1, 1, posX, posY)
 {
 
 }
@@ -36,6 +36,50 @@ Player const &Player::operator=(Player const &player)
     this->_chp = player.getChp();
     this->_posX = player.getPosX();
     this->_posY = player.getPosY();
+
+    return player;
+}
+
+Player &operator-=(Player &player, int n)
+{
+    if (player.getPosX() - n < 0) {
+        player.setPosX(0);
+    } else {
+        player.setPosX(player.getPosX() - n - player.getVelocity());
+    }
+
+    return player;
+}
+
+Player &operator+=(Player &player, int n)
+{
+    if (player.getPosX() + n > 100) {
+        player.setPosX(100);
+    } else {
+        player.setPosX(player.getPosX() + n + player.getVelocity());
+    }
+
+    return player;
+}
+
+Player &operator-(Player &player, int n)
+{
+    if (player.getPosY() + n > 100) {
+        player.setPosY(100);
+    } else {
+        player.setPosY(player.getPosY() + n);
+    }
+
+    return player;
+}
+
+Player &operator+(Player &player, int n)
+{
+    if (player.getPosY() - n < 0) {
+        player.setPosY(0);
+    } else {
+        player.setPosY(player.getPosY() - n);
+    }
 
     return player;
 }

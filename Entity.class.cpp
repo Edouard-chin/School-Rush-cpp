@@ -6,11 +6,12 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 00:49:40 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 03:40:21 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/11 05:40:26 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Entity.class.hpp"
+#include <cstdlib>
 
 const    char        Entity::MONSTER = 'M';
 const    char        Entity::PLAYER = 'P';
@@ -122,4 +123,12 @@ void        Entity::setPosY(int posY)
 void        Entity::die()
 {
     this->setPosX(100);
+    this->setPosY(this->generateCoordinate(0, 100));
+}
+
+int         Entity::generateCoordinate(int min, int max)
+{
+    int randNum = rand()%(min-max + 1) + min;
+
+    return randNum;
 }

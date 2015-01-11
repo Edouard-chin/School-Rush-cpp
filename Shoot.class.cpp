@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 03:36:32 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 03:39:47 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/11 06:24:51 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Shoot::Shoot(int posX, int posY) : Entity(Shoot::SHOOT, -1, Shoot::RED, 50, 50, posX, posY)
 {
-
+    this->_damage = 10;
 }
 
 Shoot::~Shoot(void)

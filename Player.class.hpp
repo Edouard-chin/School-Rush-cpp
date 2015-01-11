@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 03:34:24 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 03:35:50 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/11 06:22:39 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,10 @@ public:
     Player const &operator=(Player const &player);
 
 };
+
+Player &operator-=(Player &player, int n);
+Player &operator+=(Player &player, int n);
+Player &operator-(Player &player, int n);
+Player &operator+(Player &player, int n);
 
 #endif

@@ -6,18 +6,18 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 01:19:40 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 03:14:59 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/11 05:41:10 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Monster.class.hpp"
 
-Monster::Monster(int posX, int posY) : Entity(Entity::MONSTER, 1, Entity::RED, 30, 30, posX, posY)
+Monster::Monster(void) : Entity(Entity::MONSTER, 1, Entity::RED, 30, 30, this->generateCoordinate(30, 100), this->generateCoordinate(0, 100))
 {
 
 }
 
-Monster::~Monster()
+Monster::~Monster(void)
 {
 
 }
