@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 00:49:40 by echin             #+#    #+#             */
-/*   Updated: 2015/01/12 01:27:00 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 01:39:38 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void        Entity::setPosY(int posY)
 void        Entity::die()
 {
     this->setPosX(100);
-    this->setPosY(this->generateCoordinate(0, 100));
+    this->setPosY(this->generateCoordinate(0, 30));
 }
 
 int         Entity::generateCoordinate(int min, int max)

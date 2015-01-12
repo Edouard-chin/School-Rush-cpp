@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 01:30:45 by echin             #+#    #+#             */
-/*   Updated: 2015/01/12 00:57:33 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 02:28:40 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #include "Player.class.hpp"
 #include "Entity.class.hpp"
 #include <unistd.h>
-#include <stdlib.h>
-
 
 struct Object {
    Wall    wall[20];
@@ -28,9 +26,7 @@ struct Object {
    int     i;
 };
 
-void moveObjects(int posX, int posY, int color, char letter);
 bool collision(Object objects);
-
 
 int main()
 {
@@ -41,40 +37,25 @@ int main()
     objects.player       = new Player(0, 15);
     objects.i            = 0;
 
-    while (input != Window::ESCAPE && !dead) {
+    while (input != Window::KEYESCAPE && !dead) {
         for (int i = 0; i < 20; i++) {
             objects.wall[i] -= 1;
-            moveObjects(objects.wall[i].getPosX(), objects.wall[i].getPosY(), objects.wall[i].getColor(), objects.wall[i].getLetter());
+            window.moveObjects(objects.wall[i].getPosX(), objects.wall[i].getPosY(), objects.wall[i].getColor(), objects.wall[i].getLetter());
         }
         for (int n = 0; n < 20; n++) {
             objects.monster[n] -= 1;
-            moveObjects(objects.monster[n].getPosX(), objects.monster[n].getPosY(), objects.monster[n].getColor(), objects.monster[n].getLetter());
+            window.moveObjects(objects.monster[n].getPosX(), objects.monster[n].getPosY(), objects.monster[n].getColor(), objects.monster[n].getLetter());
         }
         for (int n = 0; n < objects.i; n++) {
             *objects.shoot[n] += objects.monster;
-            moveObjects(objects.shoot[n]->getPosX(), objects.shoot[n]->getPosY(), objects.shoot[n]->getColor(), objects.shoot[n]->getLetter());
+            window.moveObjects(objects.shoot[n]->getPosX(), objects.shoot[n]->getPosY(), objects.shoot[n]->getColor(), objects.shoot[n]->getLetter());
         }
-        moveObjects(objects.player->getPosX(), objects.player->getPosY(), objects.player->getColor(), objects.player->getLetter());
+        window.moveObjects(objects.player->getPosX(), objects.player->getPosY(), objects.player->getColor(), objects.player->getLetter());
         input = wgetch(stdscr);
         erase();
-        if (input == 261)
-            *objects.player += 1;
-        else if (input == 260)
-            *objects.player -= 1;
-        else if (input == 259)
-            *objects.player + 1;
-        else if (input == 258)
-            *objects.player - 1;
-        else if (input == 32) {
-            if (objects.i == 40) {
-                objects.i = 0;
-            }
-            objects.shoot[objects.i] = new Shoot(objects.player->getPosX() + 1, objects.player->getPosY());
-            objects.i++;
-        }
-
+        window.handleInput(input, objects.player, &objects.i, objects.shoot);
         dead = collision(objects);
-        usleep(27000);
+        usleep(Window::DIFFICULTY * 540);
     }
 
     delete objects.player;
@@ -102,11 +83,4 @@ bool  collision(Object objects)
     }
 
     return false;
-}
-
-void moveObjects(int posX, int posY, int color, char letter)
-{
-    attron(COLOR_PAIR(color));
-    mvprintw(posY, posX, "%c", letter);
-    attroff(COLOR_PAIR(color));
 }

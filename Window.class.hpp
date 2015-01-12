@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 00:30:21 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 03:29:38 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 02:15:21 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define WINDOW_CLASS_HPP
 # include <iostream>
 # include <ncurses.h>
+# include "Player.class.hpp"
+# include "Shoot.class.hpp"
+
 
 class Window
 {
@@ -30,9 +33,20 @@ public:
     void    setSizeY(int    sizeY);
 
     void    screenInit(int sizeX, int sizeY);
+    void    moveObjects(int posX, int posY, int color, char letter);
+    void    handleInput(int input, Player *player, int *i, Shoot **shoot);
+
+
+
+
 
     static const    int     DIFFICULTY;
-    static const    int     ESCAPE;
+    static const    int     KEYESCAPE;
+    static const    int     KEYUP;
+    static const    int     KEYDOWN;
+    static const    int     KEYRIGHT;
+    static const    int     KEYLEFT;
+    static const    int     KEYSPACE;
 
 private:
     int     _sizeX;

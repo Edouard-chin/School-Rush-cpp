@@ -6,13 +6,13 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 01:19:40 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 21:34:52 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 01:45:18 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Monster.class.hpp"
 
-Monster::Monster(void) : Entity(Entity::MONSTER, 1, Entity::RED, 30, 30, this->generateCoordinate(30, 100), this->generateCoordinate(0, 100))
+Monster::Monster(void) : Entity(Entity::MONSTER, 1, Entity::RED, 30, 30, this->generateCoordinate(30, 100), this->generateCoordinate(0, 30))
 {
 
 }
