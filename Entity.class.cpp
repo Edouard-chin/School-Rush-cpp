@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 00:49:40 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 23:04:54 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 01:27:00 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <cstdlib>
 
 const    char        Entity::MONSTER = 'M';
-const    char        Entity::PLAYER = 'P';
-const    char        Entity::WALL = 'W';
-const    char        Entity::SHOOT = '*';
+const    char        Entity::PLAYER = '>';
+const    char        Entity::WALL = '#';
+const    char        Entity::SHOOT = '-';
 const    int         Entity::RED = 1;
 const    int         Entity::GREEN = 2;
 const    int         Entity::BLUE = 3;

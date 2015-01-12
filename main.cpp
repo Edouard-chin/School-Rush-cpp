@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 01:30:45 by echin             #+#    #+#             */
-/*   Updated: 2015/01/12 00:50:39 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 00:57:33 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,17 @@ bool  collision(Object objects)
 {
     int playerPosX = objects.player->getPosX();
     int playerPosY = objects.player->getPosY();
+    int objectPosX = 0;
 
     for (int i = 0; i < 20; i++) {
-        if (objects.wall[i].getPosX() == playerPosX && objects.wall[i].getPosY() == playerPosY) {
+        objectPosX = objects.wall[i].getPosX();
+        if ((objectPosX == playerPosX || objectPosX - 1 == playerPosX || objectPosX + 1 == playerPosX) && objects.wall[i].getPosY() == playerPosY) {
             return true;
         }
     }
     for (int n = 0; n < 20; n++) {
-        if (objects.monster[n].getPosX() == playerPosX && objects.monster[n].getPosY() == playerPosY) {
+        objectPosX = objects.monster[n].getPosX();
+        if ((objectPosX == playerPosX || objectPosX - 1 == playerPosX || objectPosX + 1 == playerPosX) && objects.monster[n].getPosY() == playerPosY) {
             return true;
         }
     }
