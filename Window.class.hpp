@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 00:30:21 by echin             #+#    #+#             */
-/*   Updated: 2015/01/12 02:38:29 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 05:14:30 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,11 @@ public:
     void    setSizeY(int    sizeY);
 
     void    screenInit(int sizeX, int sizeY);
-    void    moveObjects(int posX, int posY, int color, char letter);
+    void    moveObjects(int posX, int posY, int color, char letter, Player *player);
     void    handleInput(int input, Player *player, int *i, Shoot **shoot);
     void    screenScrolling(Object *objects);
+    void    gameOver(Player *player);
+
 
 
     static const    int     DIFFICULTY;

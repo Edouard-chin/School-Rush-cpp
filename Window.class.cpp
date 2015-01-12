@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 00:28:26 by echin             #+#    #+#             */
-/*   Updated: 2015/01/12 02:40:15 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 05:22:53 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ const    int     Window::KEYDOWN = 258;
 const    int     Window::KEYLEFT = 260;
 const    int     Window::KEYSPACE = 32;
 
-Window::Window(void) : _sizeX(100), _sizeY(30)
+Window::Window(void) : _sizeX(100), _sizeY(32)
 {
-    this->screenInit(this->_sizeX, this->_sizeY);
+    this->screenInit(_sizeX, _sizeY);
+    this->setSizeX(_sizeX);
+    this->setSizeY(_sizeY);
 }
 
 Window::~Window(void)
@@ -64,11 +66,16 @@ void    Window::screenInit(int sizeX, int sizeY)
     init_pair(3, COLOR_BLUE, COLOR_BLACK);
 }
 
-void    Window::moveObjects(int posX, int posY, int color, char letter)
+void    Window::moveObjects(int posX, int posY, int color, char letter, Player *player)
 {
     attron(COLOR_PAIR(color));
     mvprintw(posY, posX, "%c", letter);
-    attroff(COLOR_PAIR(color));
+    mvprintw(31, 0, "%s", "SCORE:");
+    mvprintw(31, 6, "%d", player->getScore());
+    attroff(COLOR_PAIR(2));
+    mvprintw(31, 10, "%s", "LIFE:");
+    mvprintw(31, 18, "%d", player->getLife());
+    attroff(COLOR_PAIR(2));
 }
 
 void    Window::handleInput(int input, Player *player, int *i, Shoot **shoot)
@@ -97,24 +104,36 @@ void    Window::screenScrolling(Object *objects)
 {
     for (int i = 0; i < 20; i++) {
         objects->wall[i] -= 1;
-        this->moveObjects(objects->wall[i].getPosX(), objects->wall[i].getPosY(), objects->wall[i].getColor(), objects->wall[i].getLetter());
+        this->moveObjects(objects->wall[i].getPosX(), objects->wall[i].getPosY(), objects->wall[i].getColor(), objects->wall[i].getLetter(), objects->player);
     }
     for (int n = 0; n < 20; n++) {
         objects->monster[n] -= 1;
-        this->moveObjects(objects->monster[n].getPosX(), objects->monster[n].getPosY(), objects->monster[n].getColor(), objects->monster[n].getLetter());
+        this->moveObjects(objects->monster[n].getPosX(), objects->monster[n].getPosY(), objects->monster[n].getColor(), objects->monster[n].getLetter(), objects->player);
     }
     for (int n = 0; n < objects->i; n++) {
-        *objects->shoot[n] += objects->monster;
-        this->moveObjects(objects->shoot[n]->getPosX(), objects->shoot[n]->getPosY(), objects->shoot[n]->getColor(), objects->shoot[n]->getLetter());
+        if (*objects->shoot[n] += objects->monster) {
+            objects->player->setScore(objects->player->getScore() + 1);
+        }
+        this->moveObjects(objects->shoot[n]->getPosX(), objects->shoot[n]->getPosY(), objects->shoot[n]->getColor(), objects->shoot[n]->getLetter(), objects->player);
     }
 
-    this->moveObjects(objects->player->getPosX(), objects->player->getPosY(), objects->player->getColor(), objects->player->getLetter());
+    this->moveObjects(objects->player->getPosX(), objects->player->getPosY(), objects->player->getColor(), objects->player->getLetter(), objects->player);
 }
 
 
-
-
-
+void    Window::gameOver(Player *player)
+{
+    clear();
+    nodelay(stdscr, FALSE);
+    attron(COLOR_PAIR(1));
+    mvprintw(30/2, 100/2, "%s", "GAME OVER");
+    attroff(COLOR_PAIR(1));
+    attron(COLOR_PAIR(2));
+    mvprintw(30/2, 100/2 + 10, "%s", "SCORE:");
+    mvprintw(30/2, 100/2 + 20, "%d", player->getScore());
+    attroff(COLOR_PAIR(1));
+    getch();
+}
 
 int     Window::getSizeX(void) const
 {

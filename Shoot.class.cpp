@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 03:36:32 by echin             #+#    #+#             */
-/*   Updated: 2015/01/12 00:51:09 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 04:50:08 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,28 @@ Shoot const &Shoot::operator=(Shoot const &shoot)
     return shoot;
 }
 
-Shoot &operator+=(Shoot &shoot, Monster *monster)
+int operator+=(Shoot &shoot, Monster *monster)
 {
     int   posX = 0;
+    int   score = 0;
 
     for (int i = 0; i < 20; i++) {
         posX = monster[i].getPosX();
         if ((shoot.getPosX() == posX + 1 || shoot.getPosX() == posX -1 || shoot.getPosX() == posX) && shoot.getPosY() == monster[i].getPosY()) {
             monster[i].die();
             shoot.die();
+            score = 1;
         }
     }
 
-    if (shoot.getPosX() + 1 + shoot.getVelocity() > 100) {
+    if (shoot.getPosX() + 1 > 100) {
         shoot.setPosX(100);
+        shoot.setPosY(40);
     } else {
         shoot.setPosX(shoot.getPosX() + 1);
     }
 
-    return shoot;
+    return score;
 }
 
 int     Shoot::getDamage(void) const

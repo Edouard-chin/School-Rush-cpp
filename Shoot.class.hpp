@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 03:36:25 by echin             #+#    #+#             */
-/*   Updated: 2015/01/11 23:54:38 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 04:41:59 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,12 @@ public:
     Shoot const &operator=(Shoot const &shoot);
     int     getDamage(void) const;
     void    setDamage(int damage);
-    int     getNumber(void) const;
 
 protected:
     int _damage;
 };
 
-Shoot &operator+=(Shoot &shoot, Monster *monster);
+int operator+=(Shoot &shoot, Monster *monster);
 
 
 #endif
