@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 00:28:26 by echin             #+#    #+#             */
-/*   Updated: 2015/01/12 02:22:55 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 02:40:15 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,27 @@ void    Window::handleInput(int input, Player *player, int *i, Shoot **shoot)
         *i = *i + 1;
     }
 }
+
+void    Window::screenScrolling(Object *objects)
+{
+    for (int i = 0; i < 20; i++) {
+        objects->wall[i] -= 1;
+        this->moveObjects(objects->wall[i].getPosX(), objects->wall[i].getPosY(), objects->wall[i].getColor(), objects->wall[i].getLetter());
+    }
+    for (int n = 0; n < 20; n++) {
+        objects->monster[n] -= 1;
+        this->moveObjects(objects->monster[n].getPosX(), objects->monster[n].getPosY(), objects->monster[n].getColor(), objects->monster[n].getLetter());
+    }
+    for (int n = 0; n < objects->i; n++) {
+        *objects->shoot[n] += objects->monster;
+        this->moveObjects(objects->shoot[n]->getPosX(), objects->shoot[n]->getPosY(), objects->shoot[n]->getColor(), objects->shoot[n]->getLetter());
+    }
+
+    this->moveObjects(objects->player->getPosX(), objects->player->getPosY(), objects->player->getColor(), objects->player->getLetter());
+}
+
+
+
 
 
 

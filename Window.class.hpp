@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 00:30:21 by echin             #+#    #+#             */
-/*   Updated: 2015/01/12 02:15:21 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 02:38:29 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,17 @@
 # include <ncurses.h>
 # include "Player.class.hpp"
 # include "Shoot.class.hpp"
+# include "Monster.class.hpp"
+# include "Wall.class.hpp"
 
+
+struct Object {
+   Wall    wall[20];
+   Player  *player;
+   Monster monster[20];
+   Shoot   *shoot[40];
+   int     i;
+};
 
 class Window
 {
@@ -35,9 +45,7 @@ public:
     void    screenInit(int sizeX, int sizeY);
     void    moveObjects(int posX, int posY, int color, char letter);
     void    handleInput(int input, Player *player, int *i, Shoot **shoot);
-
-
-
+    void    screenScrolling(Object *objects);
 
 
     static const    int     DIFFICULTY;
