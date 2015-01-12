@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 03:34:35 by echin             #+#    #+#             */
-/*   Updated: 2015/01/12 05:56:46 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 06:04:11 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ Player &operator+(Player &player, int n)
 bool    operator --(Player &player)
 {
     if (player.getLife() -1 == 0) {
+        sleep(1);
         return true;
     } else {
         player.setPosX(player.getPosX() + 2);

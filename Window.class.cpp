@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 00:28:26 by echin             #+#    #+#             */
-/*   Updated: 2015/01/12 05:22:53 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 06:01:28 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,16 +123,21 @@ void    Window::screenScrolling(Object *objects)
 
 void    Window::gameOver(Player *player)
 {
+    int input = 0;
+
     clear();
     nodelay(stdscr, FALSE);
     attron(COLOR_PAIR(1));
-    mvprintw(30/2, 100/2, "%s", "GAME OVER");
+    mvprintw(30/2, 100/2, "%s", "GAME OVER PRESS ESCAPE TO QUIT");
     attroff(COLOR_PAIR(1));
     attron(COLOR_PAIR(2));
-    mvprintw(30/2, 100/2 + 10, "%s", "SCORE:");
-    mvprintw(30/2, 100/2 + 20, "%d", player->getScore());
+    mvprintw(30/2 + 1, 100/2, "%s", "SCORE:");
+    mvprintw(30/2 + 1, 100/2 + 10, "%d", player->getScore());
     attroff(COLOR_PAIR(1));
-    getch();
+    input = getch();
+    if (input != Window::KEYESCAPE) {
+        this->gameOver(player);
+    }
 }
 
 int     Window::getSizeX(void) const

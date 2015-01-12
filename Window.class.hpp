@@ -6,7 +6,7 @@
 /*   By: echin <echin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 00:30:21 by echin             #+#    #+#             */
-/*   Updated: 2015/01/12 05:14:30 by echin            ###   ########.fr       */
+/*   Updated: 2015/01/12 06:02:36 by echin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ public:
     void    handleInput(int input, Player *player, int *i, Shoot **shoot);
     void    screenScrolling(Object *objects);
     void    gameOver(Player *player);
-
-
 
     static const    int     DIFFICULTY;
     static const    int     KEYESCAPE;
